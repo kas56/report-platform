@@ -26,14 +26,81 @@
                                 <option value="1">ООО Цветочки</option>
                                 <option value="2">ООО Ягодки</option>
                             </select>
-                            <small id="legalIdHelp" class="form-text text-muted">Выбор юридического лица</small>
+                            <!--<small id="legalIdHelp" class="form-text text-muted">Выбор юридического лица</small>-->
+                        </div>
+                        <div class="form-group">
+                            <label for="bankBik">БИК банка</label>
+                            <select class="form-control form-control-sm" id="bankBik" name="bankBik">
+                                <option value="" selected="selected"></option>
+                                <option value="1">0123</option>
+                                <option value="2">4567</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="bankName">Наименование банка</label>
+                            <input type="text" class="form-control" id="bankName" name="bankName">
+                        </div>
+                        <div class="form-group">
+                            <label for="commentText">Комментарий</label>
+                            <textarea class="form-control" id="commentText" name="commentText"></textarea>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6">
+                                <label for="currencyId">Валюта</label>
+                                <select class="form-control form-control-sm" id="currencyId" name="currencyId">
+                                    <option value="" selected="selected"></option>
+                                    <option value="1">RUB</option>
+                                    <option value="2">EUR</option>
+                                </select>
+                            </div>
+                            <div class="col-xs-12 col-sm-6">
+                                <label for="amountCurrency">Cумма в валюте счета</label>
+                                <input class="form-control" id="amountCurrency" name="amountCurrency">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contractType">Вид договора</label>
+                            <input type="text" class="form-control" id="contractType" name="contractType">
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-4">
+                                <div class="form-group">
+                                    <label for="signContractDate">Дата заключения договора</label>
+                                    <input type="date" class="form-control" id="signContractDate" name="signContractDate">
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-4">
+                                <div class="form-group">
+                                    <label for="beginContractDate">Дата начала действия договора</label>
+                                    <input type="date" class="form-control" id="beginContractDate" name="beginContractDate">
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-4">
+                                <div class="form-group">
+                                    <label for="endContractDate">Дата окончания договора</label>
+                                    <input type="date" class="form-control" id="endContractDate" name="endContractDate">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6">
+                                <label for="amountCurrencyId">Валюта</label>
+                                <select class="form-control form-control-sm" id="amountCurrencyId" name="amountCurrencyId">
+                                    <option value="" selected="selected"></option>
+                                    <option value="1">RUB</option>
+                                    <option value="2">EUR</option>
+                                </select>
+                            </div>
+                            <div class="col-xs-12 col-sm-6">
+                                <label for="amount">Cумма</label>
+                                <input class="form-control" id="amount" name="amount">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
 <!-- /.container -->
 
