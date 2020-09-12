@@ -1,9 +1,10 @@
-package ru.plot.service;
+package ru.plot.service.impl;
 
 import org.springframework.stereotype.Service;
 import ru.plot.entity.Table1;
 import ru.plot.pojo.Pojo1;
 import ru.plot.repo.Table1Repository;
+import ru.plot.service.BusinessService;
 
 @Service
 public class BusinessServiceImpl implements BusinessService {
