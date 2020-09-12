@@ -80,3 +80,10 @@ databaseChangeLog:
   - include:
       #
       file: /db/changelog/29_settings.sql
+
+  - include:
+      #
+      file: /db/changelog/16_user_session.sql
+  - include:
+      #
+      file: /db/changelog/17_users.sql
