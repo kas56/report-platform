@@ -11,7 +11,10 @@ create table h2020.users
   s_firstname       varchar(255),
   s_secondname      varchar(255),
   s_middlename      varchar(255),
-  s_position        varchar(1000)
+  s_position        varchar(1000),
+  s_email           varchar(255),
+  s_password        varchar(255),
+  s_roles           varchar(255)
 );
 
 -- add comments to the table

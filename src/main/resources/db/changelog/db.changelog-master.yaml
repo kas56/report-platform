@@ -29,5 +29,7 @@ databaseChangeLog:
   - include:
           #
         file: /db/changelog/11_curs_val_cb.sql
-
+  - include:
+      #
+      file: /db/changelog/14_users.sql
 
