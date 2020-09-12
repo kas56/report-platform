@@ -80,10 +80,37 @@ databaseChangeLog:
   - include:
       #
       file: /db/changelog/29_settings.sql
-
   - include:
       #
       file: /db/changelog/16_user_session.sql
   - include:
       #
       file: /db/changelog/17_users.sql
+  - include:
+      #
+      file: /db/changelog/30_v_last_days_for_reports.sql
+  - include:
+      #
+      file: /db/changelog/31_v_data_month_report.sql
+  - include:
+      #
+      file: /db/changelog/32_v_data_quarter_report.sql
+  - include:
+      #
+      file: /db/changelog/33_v_data_year_report.sql
+  - include:
+      #
+      file: /db/changelog/34_alter_reports.sql
+  - include:
+      #
+      file: /db/changelog/35_add_xml_data.sql
+  - include:
+      #
+      file: /db/changelog/36_v_save_reports.sql
+  - include:
+      #
+      file: /db/changelog/37_views_for_xml.sql
+  - include:
+      #
+      file: /db/changelog/38_alter_v_report_header.sql
+
