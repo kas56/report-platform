@@ -32,4 +32,23 @@ databaseChangeLog:
   - include:
       #
       file: /db/changelog/14_users.sql
+  - include:
+      #
+      file: /db/changelog/16_reports.sql
+
+  - include:
+      #
+      file: /db/changelog/17_add_column_users.sql
+
+  - include:
+      #
+      file: /db/changelog/18_type_dog.sql
+
+  - include:
+      #
+      file: /db/changelog/19_insert_type_dog.sql
+  - include:
+      #
+      file: /db/changelog/20_bank_dog.sql
+
 
