@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.web.authentication.preauth.j2ee.J2eePreAuthenticatedProcessingFilter;
 import org.springframework.stereotype.Component;
+import ru.plot.auth.PermissionHolder;
 import ru.plot.dto.UserDto;
 import ru.plot.service.AuthService;
 import ru.plot.utils.CommonUtils;
@@ -34,7 +35,7 @@ public class AuthFilter extends J2eePreAuthenticatedProcessingFilter {
     }
 
     private boolean isPublicRes (String path) {
-        if (path.contains("report") || "/".equals(path)) {
+        if (path.contains("/report") || path.contains("/catalog") || "/".equals(path)) {
             return false;
         }
 
@@ -85,15 +86,13 @@ public class AuthFilter extends J2eePreAuthenticatedProcessingFilter {
 
         try {
             UserDto userDto = authService.getUserAndPermissions(sessionKey);
-//            ((HttpServletRequest) request).getUserPrincipal()
+            PermissionHolder.setUserInfo(userDto);
         } catch (Exception ex) {
-            LOGGER.error("");
-//            ((HttpServletResponse)response).setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            LOGGER.error("Пользователь не авторизован", ex);
             RequestDispatcher rd = ((HttpServletRequest) request).getRequestDispatcher("/login");
             rd.forward(request,response);
             return;
         }
-
 
         super.doFilter(request, response, chain);
     }
