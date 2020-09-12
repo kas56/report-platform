@@ -32,6 +32,54 @@ databaseChangeLog:
   - include:
       #
       file: /db/changelog/14_users.sql
+  - include:
+      #
+      file: /db/changelog/16_reports.sql
+
+  - include:
+      #
+      file: /db/changelog/17_add_column_users.sql
+
+  - include:
+      #
+      file: /db/changelog/18_type_dog.sql
+
+  - include:
+      #
+      file: /db/changelog/19_insert_type_dog.sql
+  - include:
+      #
+      file: /db/changelog/20_bank_dog.sql
+  - include:
+      #
+      file: /db/changelog/21_grant_org_user.sql
+  - include:
+      #
+      file: /db/changelog/22_add_summ_oper.sql
+  - include:
+      #
+      file: /db/changelog/23_alter_struct.sql
+  - include:
+      #
+      file: /db/changelog/24_balance_account.sql
+  - include:
+      #
+      file: /db/changelog/25_alter_struct.sql
+  - include:
+      #
+      file: /db/changelog/26_report_details.sql
+  - include:
+      #
+      file: /db/changelog/26_1_alter_table.sql
+  - include:
+      #
+      file: /db/changelog/27_v_data_day_report.sql
+  - include:
+      #
+      file: /db/changelog/28_v_report_header.sql
+  - include:
+      #
+      file: /db/changelog/29_settings.sql
 
   - include:
       #
