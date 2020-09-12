@@ -12,7 +12,7 @@ import java.util.Currency;
 import java.util.List;
 
 @Controller
-@RequestMapping("/user/catalog")
+@RequestMapping("/catalog")
 public class CatalogController {
 
     @GetMapping("/CurrencyRates")
