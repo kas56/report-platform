@@ -1,6 +1,6 @@
 package ru.plot.repo;
 
-import com.sample.VSaveReportsValbalXml;
+import ru.plot.entity.VSaveReportsValbalXml;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

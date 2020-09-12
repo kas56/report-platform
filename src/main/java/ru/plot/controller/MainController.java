@@ -8,7 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import ru.plot.service.PermissionService;
 
+import javax.annotation.security.RolesAllowed;
+
 @Controller
+@RolesAllowed("ROLE_ADMIN")
 public class MainController {
 
     private PermissionService permissionService;

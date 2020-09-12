@@ -1,6 +1,6 @@
 package ru.plot.service;
 
-import com.sample.VSaveReportsValbalXml;
+import ru.plot.entity.VSaveReportsValbalXml;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.plot.entity.*;

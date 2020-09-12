@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
 >
 <head>
     <title>Spring Security Example </title>
@@ -11,19 +13,25 @@
 <body>
 
 <div class="main">
-
+<!--    <sec:authorize access="isAuthenticated()">
+        response.sendRedirect("/");
+    </sec:authorize>-->
 
     <div class="container">
         <center>
             <div class="middle">
                 <div id="login">
 
-                    <form action="javascript:void(0);" method="get">
-
+                    <form th:action="@{/login}" method="post">
+                        <div th:if="${param.error}">
+                            <div class="alert alert-danger">
+                                Invalid username or password.
+                            </div>
+                        </div>
                         <fieldset class="clearfix auth_form">
 
-                            <p ><span class="fa fa-user"></span><input class="user_field" type="text"  Placeholder="Username" required></p> <!-- JS because of IE support; better: placeholder="Username" -->
-                            <p><span class="fa fa-lock"></span><input class="password_field" type="password"  Placeholder="Password" required></p> <!-- JS because of IE support; better: placeholder="Password" -->
+                            <p ><span class="fa fa-user"></span><input class="user_field" type="text" id="username" name="username"  Placeholder="Username" required></p> <!-- JS because of IE support; better: placeholder="Username" -->
+                            <p><span class="fa fa-lock"></span><input class="password_field" type="password" id="password" name="password"  Placeholder="Password" required></p> <!-- JS because of IE support; better: placeholder="Password" -->
 
                             <div class="error_message">
 
@@ -31,7 +39,14 @@
 
                             <div>
                                 <span style="width:48%; text-align:left;  display: inline-block;"><a class="small-text" href="#">Забыли пароль?</a></span>
-                                <span style="width:50%; text-align:right;  display: inline-block;"><input class="enter_btn" type="submit" value="Войти"></span>
+<!--                                <span style="width:50%; text-align:right;  display: inline-block;"><input class="enter_btn" type="submit" value="Войти"></span>-->
+                                <span style="width:50%; text-align:right;  display: inline-block;">
+                                      <input type="submit"
+                                             name="login-submit"
+                                             id="login-submit"
+                                             class="form-control btn btn-info"
+                                             value="Войти">
+                                </span>
                             </div>
 
                         </fieldset>
