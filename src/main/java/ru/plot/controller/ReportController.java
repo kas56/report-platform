@@ -16,8 +16,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 import ru.plot.repo.DataDayReportRepository;
+import ru.plot.service.PermissionService;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/report")
@@ -26,24 +29,37 @@ public class ReportController {
     @Autowired
     private DataDayReportRepository dataDayReportRepository;
 
+    private PermissionService permissionService;
+
+    @Autowired
+    public ReportController(PermissionService permissionService) {
+        this.permissionService = permissionService;
+    }
+
     @RequestMapping(value = { "", "/" }, method = RequestMethod.GET)
     public String getIndexPage(Model model) {
         model.addAttribute("message", "Noname foundation");
+        model.addAttribute("perms", permissionService.getUserPermissions());
 
         return "/report";
     }
     @GetMapping("/balance")
-    public String balances() {
+    public String balances(Model model) {
+        model.addAttribute("perms", permissionService.getUserPermissions());
         return "/report/balances";
     }
 
     @GetMapping("/balance/{id}")
-    public String balanceCard() {
+    public String balanceCard(Model model) {
+        model.addAttribute("perms", permissionService.getUserPermissions());
+
         return "/report/balance";
     }
 
     @GetMapping("/balance/form")
-    public String balanceForm(@RequestParam(required = false, value = "reportId") String reportId) {
+    public String balanceForm(@RequestParam(required = false, value = "reportId") String reportId, Model model) {
+        model.addAttribute("perms", permissionService.getUserPermissions());
+
         return "/report/balance-form";
     }
 
