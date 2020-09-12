@@ -2,28 +2,27 @@ create table h2020.organizations
 (
   id_org            bigserial primary key,
   main_id_org       bigint references h2020.organizations(id_org),
-  dt_update         timestamp(6) default now() not null,
-  s_user_modify     varchar(100) not null,
+  dt_update         timestamp(6) default now(),
+  s_user_modify     varchar(100),
   s_short_name      varchar(4000),
-  s_full_name       varchar(4000) not null,
-  s_org_inn         varchar(10) constraint org_inn check (length(regexp_replace(s_org_inn, '^[[:digit:]]{10}$', '')) = 0),
-  s_org_kpp         varchar(9) constraint org_kpp check (length(regexp_replace(s_org_kpp, '^[[:digit:]]{9}$', '')) = 0),
-  s_org_ogrn        varchar(13) constraint org_ogrn check (length(regexp_replace(s_org_kpp, '^[[:digit:]]{13}$', '')) = 0),
-  s_jur_address     varchar(4000) not null,
+  s_full_name       varchar(4000),
+  s_org_inn         varchar(10),
+  s_org_kpp         varchar(9),
+  s_org_ogrn        varchar(13),
+  s_jur_address     varchar(4000),
   s_post_address    varchar(4000),
   s_contact_fio     varchar(1000),
   s_phone           varchar(20),
   s_fax             varchar(20),
-  s_email           varchar(256) constraint org_email check (regexp_match(trim(s_email), '.+@.+\..+') is not null),
-  s_org_type        varchar(1000) not null,
+  s_email           varchar(256),
+  s_org_type        varchar(1000)
   d_registration    date,
   id_oksm           bigint references h2020.oksm(id_oksm),
-  s_okato           varchar(11) constraint org_okato check (length(regexp_replace(rpad(s_okato, 11, '0'), '^[[:digit:]]{11}$', '')) = 0),
-  s_oktmo           varchar(11) constraint org_oktmo check (length(regexp_replace(rpad(s_oktmo, 11, '0'), '^[[:digit:]]{11}$', '')) = 0),
-  s_okpo            varchar(10) constraint org_okpo check ((length(regexp_replace(s_okpo, '^[[:digit:]]{8}$', '')) = 0)
-                                                       or (length(regexp_replace(s_okpo, '^[[:digit:]]{10}$', '')) = 0)),
-  is_inside_org     boolean default true not null,
-  is_admin_org      boolean default false not null
+  s_okato           varchar(11),
+  s_oktmo           varchar(11),
+  s_okpo            varchar(10),
+  is_inside_org     boolean default true,
+  is_admin_org      boolean default false
 );
 
 
