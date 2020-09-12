@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring Boot Thymeleaf + Spring Security</title>
+
+    <div th:replace="fragments/header :: header-css"/>
+
+</head>
+<body>
+<div th:replace="fragments/header :: header"/>
+    <div class="container">
+        <table class="table table-bordered" id="messages" width="100%" cellspacing="0">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Наименование организации </th>
+                <th>БИК </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th>-</th>
+                <th>-</th>
+                <th>-</th>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+
+</html>
