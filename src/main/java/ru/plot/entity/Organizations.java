@@ -15,10 +15,7 @@ import java.sql.Timestamp;
 public class Organizations {
 
 @Id
-//TODO: Define generator PK
-//@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_...")
-//@SequenceGenerator(name = "SEQ_...", sequenceName = "SEQ_...", allocationSize = 1)
-  // id организации
+@GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id_org") private BigInteger id;
   // ссылка на головную организацию
   @Column(name = "main_id_org") private BigInteger mainIdOrg;

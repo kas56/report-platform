@@ -38,31 +38,6 @@
             </table>
         </div>
         </div>
-
-
-        <table class="table table-bordered" id="messages" width="100%" cellspacing="0">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Код валюты </th>
-                <th>Символьный код валюты </th>
-                <th>Наименование валюты</th>
-                <th>Единицы</th>
-                <th>Цена</th>
-            </tr>
-            </thead>
-            <tbody>
-
-                <tr th:each ="rate : ${currencyRates}">
-                    <td th:utext="${rate.id}">...</td>
-                    <td th:utext="${rate.okv.numcode}">...</td>
-                    <td th:utext="${rate.okv.charcode}">...</td>
-                    <td th:utext="${rate.nominal}">...</td>
-                    <td th:utext="${rate.okv.name}">...</td>
-                    <td th:utext="${rate.value}">...</td>
-                </tr>
-            </tbody>
-        </table>
     </div>
 
 

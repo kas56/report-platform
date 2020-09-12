@@ -13,6 +13,7 @@ import java.math.BigInteger;
 public class Okv {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_okv")
     private BigInteger id;
 

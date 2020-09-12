@@ -16,11 +16,7 @@ import java.sql.Timestamp;
 public class VDataDayReport {
 
 @Id
-//TODO: Define generator PK
-//@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_...")
-//@SequenceGenerator(name = "SEQ_...", sequenceName = "SEQ_...", allocationSize = 1)
-  // дата баланса счетов (по ней получаются и операции)
-  @Column(name = "d_date_balance") private LocalDate dateBalance;
+@Column(name = "d_date_balance") private LocalDate dateBalance;
   // номер строки по порядку
   @Column(name = "npp") private BigInteger npp;
   // ID организации из внешней системы

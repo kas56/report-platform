@@ -16,10 +16,7 @@ import java.sql.Timestamp;
 public class BankDog {
 
 @Id
-//TODO: Define generator PK
-//@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_...")
-//@SequenceGenerator(name = "SEQ_...", sequenceName = "SEQ_...", allocationSize = 1)
-  // id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id_bank_dog") private BigInteger id;
   // номер договора
   @Column(name = "s_num_dog") private String numDog;
