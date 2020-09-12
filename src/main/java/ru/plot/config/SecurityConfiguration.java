@@ -1,11 +1,17 @@
 package ru.plot.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import ru.plot.auth.AuthenticationProvider;
+
+import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
@@ -18,6 +24,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication().withUser("admin").password("{noop}admin").roles("ADMIN");
         auth.inMemoryAuthentication().withUser("user").password("{noop}user").roles("USER");
+    }
+
+    @Override
+    @Bean
+    protected AuthenticationManager authenticationManager() throws Exception {
+        return new ProviderManager(Arrays.asList((AuthenticationProvider) new AuthenticationProvider()));
     }
 
     // роль admin всегда есть доступ к /admin/**

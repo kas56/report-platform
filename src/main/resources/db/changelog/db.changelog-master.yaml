@@ -33,3 +33,9 @@ databaseChangeLog:
       #
       file: /db/changelog/14_users.sql
 
+  - include:
+      #
+      file: /db/changelog/16_user_session.sql
+  - include:
+      #
+      file: /db/changelog/17_users.sql

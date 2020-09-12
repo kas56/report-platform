@@ -20,14 +20,14 @@
 
                     <form action="javascript:void(0);" method="get">
 
-                        <fieldset class="clearfix">
+                        <fieldset class="clearfix auth_form">
 
-                            <p ><span class="fa fa-user"></span><input type="text"  Placeholder="Username" required></p> <!-- JS because of IE support; better: placeholder="Username" -->
-                            <p><span class="fa fa-lock"></span><input type="password"  Placeholder="Password" required></p> <!-- JS because of IE support; better: placeholder="Password" -->
+                            <p ><span class="fa fa-user"></span><input class="user_field" type="text"  Placeholder="Username" required></p> <!-- JS because of IE support; better: placeholder="Username" -->
+                            <p><span class="fa fa-lock"></span><input class="password_field" type="password"  Placeholder="Password" required></p> <!-- JS because of IE support; better: placeholder="Password" -->
 
                             <div>
                                 <span style="width:48%; text-align:left;  display: inline-block;"><a class="small-text" href="#">Забыли пароль?</a></span>
-                                <span style="width:50%; text-align:right;  display: inline-block;"><input type="submit" value="Войти"></span>
+                                <span style="width:50%; text-align:right;  display: inline-block;"><input class="enter_btn" type="submit" value="Войти"></span>
                             </div>
 
                         </fieldset>
@@ -51,5 +51,7 @@
 
 </div>
 
+<script type="text/javascript" src="/js/helper.js"></script>
+<script type="text/javascript" src="/js/pages/login.js"></script>
 </body>
 </html>
