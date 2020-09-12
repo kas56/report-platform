@@ -12,14 +12,20 @@
     <xsd:complexType name="ReportBalance">
         <xsd:sequence>
             <xsd:element name="onDate" type="xsd:date" />
-            <xsd:element name="organization" type="Organization" />
+            <xsd:element name="compilerReport" type="CompilerReport" />
             <xsd:element name="responsible" type="Responsible" />
-            <xsd:element name="partner" type="Partner"
+            <xsd:element name="organizations" >
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="organization" type="Organization" minOccurs="1" maxOccurs="unbounded" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
         </xsd:sequence>
     </xsd:complexType>
 
 
-    <xsd:complexType name="Organization">
+    <xsd:complexType name="CompilerReport">
         <xsd:sequence>
             <xsd:element name="orgName" type="xsd:string" />
             <xsd:element name="inn" type="xsd:string" />
@@ -34,23 +40,60 @@
         </xsd:sequence>
     </xsd:complexType>
 
-    <xsd:complexType name="Partner">
+
+    <xsd:complexType name="Organization">
         <xsd:sequence>
             <xsd:element name="id" type="xsd:string"/>
-            <xsd:element name="kpp" type="xsd:string" />
-            <xsd:element name="partnerName" type="xsd:string" />
-            <xsd:element name="main" >
-                <xsd:simpleType>
-                    <xsd:restriction base="xsd:string">
-                        <xsd:enumeration value="Main"/>
-                        <xsd:enumeration value="Branch"/>
-                    </xsd:restriction>
-                </xsd:simpleType>
+            <xsd:element name="banks">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="bank" type="Bank" minOccurs="1" maxOccurs="unbounded" />
+                    </xsd:sequence>
+                </xsd:complexType>
             </xsd:element>
             <xsd:element name="bik" type="xsd:string" />
             <xsd:element name="bankName" type="xsd:string" />
             <xsd:element name="comment" type="xsd:string" />
         </xsd:sequence>
     </xsd:complexType>
-    
+
+    <xsd:complexType name="Bank">
+        <xsd:sequence>
+            <xsd:element name="bik" type="xsd:string" />
+            <xsd:element name="bankName" type="xsd:string" />
+            <xsd:element name="comment" type="xsd:string" />
+            <xsd:element name="balances">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="balance" type="Balance" minOccurs="1" maxOccurs="unbounded" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="Balance">
+        <xsd:sequence>
+            <xsd:element name="currency" type="xsd:string" />
+            <xsd:element name="balance" type="xsd:double" />
+            <xsd:element name="contracts" >
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="contract" type="Contract" minOccurs="1" maxOccurs="unbounded" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="Contract">
+        <xsd:sequence>
+            <xsd:element name="contractType" type="xsd:string" />
+            <xsd:element name="contractCreateDate" type="xsd:date" />
+            <xsd:element name="contractStartDate" type="xsd:date" />
+            <xsd:element name="contractEndDate" type="xsd:date" />
+            <xsd:element name="contractPercent" type="xsd:double" />
+            <xsd:element name="conractCurrency" type="xsd:string" />
+            <xsd:element name="contractBalance" type="xsd:double" />
+        </xsd:sequence>
+    </xsd:complexType>
 </xsd:schema>
