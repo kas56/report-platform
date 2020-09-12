@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
 @Getter
 @Setter
 @Entity
@@ -13,10 +16,11 @@ public class CurrencyRate {
 
     @Id
     @Column(name = "id_curs_val_cb")
-    private Integer id;
+    @SequenceGenerator(name = "id_curs_val_cb_seq",schema = "h2020", sequenceName = "curs_val_cb_id_curs_val_cb_seq")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "id_curs_val_cb_seq")
+    private BigInteger id;
 
-    @OneToOne(cascade = CascadeType.ALL,
-                fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "id_okv")
     private Okv okv;
 
@@ -24,7 +28,7 @@ public class CurrencyRate {
     private Integer nominal;
 
     @Column(name = "value")
-    private String value;
+    private BigDecimal value;
 
     public CurrencyRate() {
     }
