@@ -22,11 +22,17 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }).then(function (response) {
             var data = JSON.parse(response);
-            console.log(data);
 
             if (data.success) {
                 window.location = "/";
+            } else {
+                let errorMessage = authForm.querySelector(".error_message");
+                errorMessage.innerHTML = "Не правильный логин или пароль";
             }
+        }, function (error) {
+            console.log(error);
+            let errorMessage = authForm.querySelector(".error_message");
+            errorMessage.innerHTML = "Не правильный логин или пароль";
         });
 
     });
