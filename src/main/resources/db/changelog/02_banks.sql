@@ -1,3 +1,6 @@
+--liquibase formatted sql
+
+--changeset User1:2
 create table h2020.banks
 (
   id_bank            bigserial primary key,
@@ -66,10 +69,6 @@ comment on column h2020.banks.s_regn
   is 'код территории российской федерации';
 comment on column h2020.banks.i_status
   is 'cтатус банка (0 - актуальные  записи, 1 – не актуальная запись, но имеет соответствующую актуальную с обновленными данными, 2 – запись неактуальна)';
-comment on column h2020.banks.dt_update
-  is 'дата последней модификации записи';
-comment on column h2020.banks.s_user_modify
-  is 'пользователь, последний изменивший запись';
 comment on column h2020.banks.s_bank_inn
   is 'ИНН банка (ИНН юр.лица не более 10 цифр)';
 comment on column h2020.banks.s_bank_kpp
