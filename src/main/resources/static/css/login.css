@@ -166,3 +166,9 @@ fieldset{
     display: flex;
     width: 600px;
 }
+
+.error_message {
+    color: red;
+    margin-bottom: 10px;
+    margin-top: -18px;
+}
