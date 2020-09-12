@@ -17,7 +17,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 import ru.plot.repo.DataDayReportRepository;
 import ru.plot.service.PermissionService;
+import ru.plot.entity.Okv;
+import ru.plot.entity.Organizations;
+import ru.plot.repo.OkvRepository;
+import ru.plot.repo.OrganizationsRepository;
 
+import java.io.*;
+import java.util.List;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -27,7 +33,10 @@ import java.io.IOException;
 public class ReportController {
 
     @Autowired
-    private DataDayReportRepository dataDayReportRepository;
+    private OrganizationsRepository organizationsRepository;
+
+    @Autowired
+    private OkvRepository okvRepository;
 
     private PermissionService permissionService;
 
@@ -58,6 +67,13 @@ public class ReportController {
 
     @GetMapping("/balance/form")
     public String balanceForm(@RequestParam(required = false, value = "reportId") String reportId, Model model) {
+        //Справочник организаций
+        List<Organizations> organizations = organizationsRepository.findAll();
+        model.addAttribute("organizations", organizations);
+
+        //Справочник валют
+        Iterable<Okv> okvCodes = okvRepository.findAll();
+        model.addAttribute("okvCodes", okvCodes);
         model.addAttribute("perms", permissionService.getUserPermissions());
 
         return "/report/balance-form";
