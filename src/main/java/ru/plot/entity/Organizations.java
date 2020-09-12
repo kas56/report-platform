@@ -18,53 +18,49 @@ public class Organizations {
 //TODO: Define generator PK
 //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_...")
 //@SequenceGenerator(name = "SEQ_...", sequenceName = "SEQ_...", allocationSize = 1)
-  // id организации
-  @Column(name = "id_org") private BigInteger idOrg;
-  // ссылка на головную организацию
+  // id РѕСЂРіР°РЅРёР·Р°С†РёРё
+  @Column(name = "id_org") private BigInteger id;
+  // СЃСЃС‹Р»РєР° РЅР° РіРѕР»РѕРІРЅСѓСЋ РѕСЂРіР°РЅРёР·Р°С†РёСЋ
   @Column(name = "main_id_org") private BigInteger mainIdOrg;
-  // дата последней модификации записи
-  @Column(name = "dt_update") private Timestamp dtUpdate;
-  // пользователь, последний изменивший запись
-  @Column(name = "s_user_modify") private String userModify;
-  // краткое наименование организации
+  // РєСЂР°С‚РєРѕРµ РЅР°РёРјРµРЅРѕРІР°РЅРёРµ РѕСЂРіР°РЅРёР·Р°С†РёРё
   @Column(name = "s_short_name") private String shortName;
-  // полное наименование организации
+  // РїРѕР»РЅРѕРµ РЅР°РёРјРµРЅРѕРІР°РЅРёРµ РѕСЂРіР°РЅРёР·Р°С†РёРё
   @Column(name = "s_full_name") private String fullName;
-  // ИНН организации
+  // РРќРќ РѕСЂРіР°РЅРёР·Р°С†РёРё
   @Column(name = "s_org_inn") private String orgInn;
-  // КПП организации
+  // РљРџРџ РѕСЂРіР°РЅРёР·Р°С†РёРё
   @Column(name = "s_org_kpp") private String orgKpp;
-  // ОГРН организации
+  // РћР“Р Рќ РѕСЂРіР°РЅРёР·Р°С†РёРё
   @Column(name = "s_org_ogrn") private String orgOgrn;
-  // юридический адрес организации
+  // СЋСЂРёРґРёС‡РµСЃРєРёР№ Р°РґСЂРµСЃ РѕСЂРіР°РЅРёР·Р°С†РёРё
   @Column(name = "s_jur_address") private String jurAddress;
-  // почтовый адрес организации
+  // РїРѕС‡С‚РѕРІС‹Р№ Р°РґСЂРµСЃ РѕСЂРіР°РЅРёР·Р°С†РёРё
   @Column(name = "s_post_address") private String postAddress;
-  // контактное лицо
+  // РєРѕРЅС‚Р°РєС‚РЅРѕРµ Р»РёС†Рѕ
   @Column(name = "s_contact_fio") private String contactFio;
-  // телефон организации
+  // С‚РµР»РµС„РѕРЅ РѕСЂРіР°РЅРёР·Р°С†РёРё
   @Column(name = "s_phone") private String phone;
-  // факс организации
+  // С„Р°РєСЃ РѕСЂРіР°РЅРёР·Р°С†РёРё
   @Column(name = "s_fax") private String fax;
-  // e-mail организации
+  // e-mail РѕСЂРіР°РЅРёР·Р°С†РёРё
   @Column(name = "s_email") private String email;
-  // организационно правовая форма организации
+  // РѕСЂРіР°РЅРёР·Р°С†РёРѕРЅРЅРѕ РїСЂР°РІРѕРІР°СЏ С„РѕСЂРјР° РѕСЂРіР°РЅРёР·Р°С†РёРё
   @Column(name = "s_org_type") private String orgType;
-  // дата рпостановки на учет в налоговом органе
+  // РґР°С‚Р° СЂРїРѕСЃС‚Р°РЅРѕРІРєРё РЅР° СѓС‡РµС‚ РІ РЅР°Р»РѕРіРѕРІРѕРј РѕСЂРіР°РЅРµ
   @Column(name = "d_registration") private Date registration;
-  // ссылка на общероссийский классификатор стран мира
+  // СЃСЃС‹Р»РєР° РЅР° РѕР±С‰РµСЂРѕСЃСЃРёР№СЃРєРёР№ РєР»Р°СЃСЃРёС„РёРєР°С‚РѕСЂ СЃС‚СЂР°РЅ РјРёСЂР°
   @Column(name = "id_oksm") private BigInteger idOksm;
-  // ОКАТО организации
+  // РћРљРђРўРћ РѕСЂРіР°РЅРёР·Р°С†РёРё
   @Column(name = "s_okato") private String okato;
-  // ОКТМО организации
+  // РћРљРўРњРћ РѕСЂРіР°РЅРёР·Р°С†РёРё
   @Column(name = "s_oktmo") private String oktmo;
-  // ОКПО организации
+  // РћРљРџРћ РѕСЂРіР°РЅРёР·Р°С†РёРё
   @Column(name = "s_okpo") private String okpo;
-  // признак своей организации
+  // РїСЂРёР·РЅР°Рє СЃРІРѕРµР№ РѕСЂРіР°РЅРёР·Р°С†РёРё
   @Column(name = "is_inside_org") private Boolean isInsideOrg;
-  // признак управляющей организации (сотрудник этой организации может изменять справочники)
+  // РїСЂРёР·РЅР°Рє СѓРїСЂР°РІР»СЏСЋС‰РµР№ РѕСЂРіР°РЅРёР·Р°С†РёРё (СЃРѕС‚СЂСѓРґРЅРёРє СЌС‚РѕР№ РѕСЂРіР°РЅРёР·Р°С†РёРё РјРѕР¶РµС‚ РёР·РјРµРЅСЏС‚СЊ СЃРїСЂР°РІРѕС‡РЅРёРєРё)
   @Column(name = "is_admin_org") private Boolean isAdminOrg;
-  // идентификатор из внешней системы
+  // РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ РёР· РІРЅРµС€РЅРµР№ СЃРёСЃС‚РµРјС‹
   @Column(name = "external_id") private String externalId;
 
 }
