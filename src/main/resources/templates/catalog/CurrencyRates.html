@@ -24,10 +24,10 @@
 
                 <tr th:each ="rate : ${currencyRates}">
                     <td th:utext="${rate.id}">...</td>
-                    <td th:utext="${rate.numCode}">...</td>
-                    <td th:utext="${rate.charCode}">...</td>
+                    <td th:utext="${rate.okv.numcode}">...</td>
+                    <td th:utext="${rate.okv.charcode}">...</td>
                     <td th:utext="${rate.nominal}">...</td>
-                    <td th:utext="${rate.name}">...</td>
+                    <td th:utext="${rate.okv.name}">...</td>
                     <td th:utext="${rate.value}">...</td>
                 </tr>
             </tbody>
