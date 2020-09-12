@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring Boot Thymeleaf + Spring Security</title>
+
+    <div th:replace="fragments/header :: header-css"/>
+
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+    <span>Форма отчета</span>
+
+    <div class="card-body">
+        <div class="table-responsive">
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="form-group">
+                            <label for="legalId">Организация</label>
+                            <select class="form-control form-control-sm" id="legalId" name="legalId">
+                                <option value="" selected="selected"></option>
+                                <option value="1">ООО Цветочки</option>
+                                <option value="2">ООО Ягодки</option>
+                            </select>
+                            <small id="legalIdHelp" class="form-text text-muted">Выбор юридического лица</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.container -->
+
+<div th:replace="fragments/footer :: footer"/>
+
+<script type="text/javascript" th:src="@{/js/table1-page.js}"></script>
+
+<script type="text/javascript">  
+    $(document).ready(table1PageScript)();
+</script>
+
+</body>
+</html>
