@@ -1,6 +1,8 @@
 create table h2020.banks
 (
   id_bank            bigserial primary key,
+  dt_update          timestamp(6) default now(),
+  s_user_modify      varchar(100),
   s_bik              varchar(9),
   s_swift            varchar(11),
   s_ksnp             varchar(32),
