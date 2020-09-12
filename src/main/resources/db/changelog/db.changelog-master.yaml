@@ -2,3 +2,18 @@ databaseChangeLog:
   - include:
         # Banks
       file: /db/changelog/02_banks.sql
+  - include:
+        #
+      file: /db/changelog/03_oksm.sql
+  - include:
+        #
+      file: /db/changelog/04_insert_oksm.sql
+  - include:
+        #
+      file: /db/changelog/05_orgs.sql
+  - include:
+        #
+      file: /db/changelog/06_okv.sql
+  - include:
+        #
+      file: /db/changelog/07_insert_okv.sql

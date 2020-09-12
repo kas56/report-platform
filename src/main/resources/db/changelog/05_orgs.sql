@@ -1,3 +1,7 @@
+--liquibase formatted sql
+
+--changeset User1:5
+
 create table h2020.organizations
 (
   id_org            bigserial primary key,
