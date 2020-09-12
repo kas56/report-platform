@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="urn:rusatom:report:balance:v1.0"
+            xmlns="urn:rusatom:report:balance:v1.0"
+            version="1.0">
+    <xsd:element name="reportBalance" type="ReportBalance">
+        <xsd:annotation>
+            <xsd:documentation>Отчет о финансовой деятельности </xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="ReportBalance">
+        <xsd:sequence>
+            <xsd:element name="onDate" type="xsd:date" />
+            <xsd:element name="organization" type="Organization" />
+            <xsd:element name="responsible" type="Responsible" />
+            <xsd:element name="partner" type="Partner"
+        </xsd:sequence>
+    </xsd:complexType>
+
+
+    <xsd:complexType name="Organization">
+        <xsd:sequence>
+            <xsd:element name="orgName" type="xsd:string" />
+            <xsd:element name="inn" type="xsd:string" />
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="Responsible">
+        <xsd:sequence>
+            <xsd:element name="FIO" type="xsd:string" />
+            <xsd:element name="email" type="xsd:string" />
+            <xsd:element name="phone" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="Partner">
+        <xsd:sequence>
+            <xsd:element name="id" type="xsd:string"/>
+            <xsd:element name="kpp" type="xsd:string" />
+            <xsd:element name="partnerName" type="xsd:string" />
+            <xsd:element name="main" >
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:enumeration value="Main"/>
+                        <xsd:enumeration value="Branch"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="bik" type="xsd:string" />
+            <xsd:element name="bankName" type="xsd:string" />
+            <xsd:element name="comment" type="xsd:string" />
+        </xsd:sequence>
+    </xsd:complexType>
+    
+</xsd:schema>
