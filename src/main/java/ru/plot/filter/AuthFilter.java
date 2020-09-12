@@ -61,10 +61,12 @@ public class AuthFilter extends J2eePreAuthenticatedProcessingFilter {
         Cookie[] cookies = ((HttpServletRequest) request).getCookies();
         String sessionKey = null;
 
-        for (Cookie cookie : cookies) {
-            if (AuthService.USER_SESSION_COOKIE.equals(cookie.getName())) {
-                sessionKey = cookie.getValue();
-                break;
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (AuthService.USER_SESSION_COOKIE.equals(cookie.getName())) {
+                    sessionKey = cookie.getValue();
+                    break;
+                }
             }
         }
 
