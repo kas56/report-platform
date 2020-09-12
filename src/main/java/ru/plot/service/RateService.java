@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class CursService {
+public class RateService {
     @Autowired
     private CurrencyRateRepository currencyRateRepository;
     @Autowired

@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Spring Boot Thymeleaf + Spring Security</title>
+    <title>РосАтом :: ПлОт</title>
 
     <div th:replace="fragments/header :: header-css"/>
 
@@ -11,13 +11,89 @@
 <div th:replace="fragments/header :: header"/>
 
 <div class="container">
-    <span>Список отчетов</span>
+    <h2>Список отчетов <span class="badge badge-secondary"></h2>
+
+    <br>
+    <div class="row">
+        <a class="nav-link" th:href="@{/report/balance/form}">
+            <button type="button" class="btn btn-success">Сформировать новый отчет</button>
+        </a>
+
+    </div>
+<!--
     <ol>
         <li>
+
             <a class="nav-link" th:href="@{/report/balance/form}">Форма отчета</a>
             <a class="nav-link" th:href="@{/report/balance/1}">Карточка отчета</a>
         </li>
-    </ol>
+    </ol>-->
+    <br>
+    <br>
+    <div class="row">
+    <div class="bs-example">
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th>№</th>
+                <th>Пользователь</th>
+                <th>Должность</th>
+                <th>Компания</th>
+                <th>Дата отчета</th>
+                <th>Статус</th>
+                <th>Действия</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><button type="button" class="btn btn-link">1</button></td>
+                <td>Крокодил Гена</td>
+                <td>Главный по отчетности</td>
+                <td>ООО "Чебурашка"</td>
+                <td>12/09/2020</td>
+                <td>Черновик</td>
+                <td>
+                    <button type="button" class="btn btn-secondary">Редактировать</button>
+                    <button type="button" class="btn btn-primary">Отправить</button>
+                </td>
+
+            </tr>
+            <tr>
+                <td><button type="button" class="btn btn-link">2</button></td>
+                <td>Ослик ИА</td>
+                <td>Младший специалист</td>
+                <td>ЗАО "Вини-Пух"</td>
+                <td>11/09/2020</td>
+                <td>Принят центром</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td><button type="button" class="btn btn-link">3</button></td>
+                <td>Просто Сова</td>
+                <td>Старший специалист</td>
+                <td>ЗАО "Вини-Пух"</td>
+                <td>12/09/2020</td>
+                <td>Черновик</td>
+                <td>
+                    <button type="button" class="btn btn-secondary">Редактировать</button>
+                    <button type="button" class="btn btn-primary">Отправить</button>
+                </td>
+            </tr>
+            <tr>
+                <td><button type="button" class="btn btn-link">4</button></td>
+                <td>Папа Карло</td>
+                <td>Ведущий специалист</td>
+                <td>ООО "Буратино"</td>
+                <td>10/09/2020</td>
+                <td>Принят центром</td>
+                <td>
+                    -
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
 
 </div>
 <!-- /.container -->
