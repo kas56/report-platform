@@ -13,6 +13,8 @@ import org.springframework.stereotype.Component;
 import ru.plot.jaxb.cb.ValCursType;
 import ru.plot.service.CursService;
 
+import java.time.LocalDate;
+
 /**
  * http://www.cbr.ru/scripts/XML_daily.asp?date_req=02/03/2002
  * Компонент закгрузки данных из центробанка по курсам валют
@@ -40,6 +42,8 @@ public class CbDicLoader extends RouteBuilder {
                             cursService.saveCurse(body);
                             exchange.getOut().setBody("Ok");
                         })
-                .to("mock:results");
+                .setBody().constant("Курсы валют за " + LocalDate.now() + " успешно загружены. Не забудьте сформировать ежедневный отчет до 11:00")
+
+                .to("direct:notifyBalanceDay");
     }
 }
