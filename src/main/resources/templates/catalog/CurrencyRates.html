@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring Boot Thymeleaf + Spring Security</title>
+
+    <div th:replace="fragments/header :: header-css"/>
+
+</head>
+<body>
+<div th:replace="fragments/header :: header"/>
+    <div class="container">
+        <table class="table table-bordered" id="messages" width="100%" cellspacing="0">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Код валюты </th>
+                <th>Символьный код валюты </th>
+                <th>Наименование валюты</th>
+                <th>Единицы</th>
+                <th>Цена</th>
+            </tr>
+            </thead>
+            <tbody>
+
+                <tr th:each ="rate : ${currencyRates}">
+                    <td th:utext="${rate.id}">...</td>
+                    <td th:utext="${rate.numCode}">...</td>
+                    <td th:utext="${rate.charCode}">...</td>
+                    <td th:utext="${rate.nominal}">...</td>
+                    <td th:utext="${rate.name}">...</td>
+                    <td th:utext="${rate.value}">...</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+
+</html>
