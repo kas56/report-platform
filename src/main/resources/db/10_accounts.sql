@@ -1,14 +1,14 @@
 create table h2020.accounts
 (
   id_accounts  bigserial primary key,
-  dt_update         timestamp(6) default now() not null,
-  s_user_modify     varchar(100) not null,
-  s_number          varchar(30) not null constraint account_number check (length(regexp_replace(s_number, '^[[:digit:]]*$', '')) = 0),
-  id_okv            bigint references h2020.okv (id_okv) not null,
-  id_type_accounts  bigint references h2020.type_accounts (id_type_accounts) not null,
-  f_balance_summ    numeric not null default 0,
-  id_bank           bigint references h2020.banks (id_bank) not null,
-  id_org            bigint references h2020.organizations (id_org) not null,
+  dt_update         timestamp(6) default now(),
+  s_user_modify     varchar(100),
+  s_number          varchar(30),
+  id_okv            bigint references h2020.okv (id_okv),
+  id_type_accounts  bigint references h2020.type_accounts (id_type_accounts),
+  f_balance_summ    numeric default 0,
+  id_bank           bigint references h2020.banks (id_bank),
+  id_org            bigint references h2020.organizations (id_org),
   s_comment         text
 );
 
