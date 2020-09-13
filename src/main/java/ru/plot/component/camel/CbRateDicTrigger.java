@@ -11,7 +11,7 @@ public class CbRateDicTrigger extends RouteBuilder {
     public void configure() throws Exception {
         CamelContext context = new DefaultCamelContext();
 
-        from("quartz://myGroup/CbRateDicTimer?cron=0+0/5+*+?+*+*+*&trigger.misfireInstruction=2")
+        from("quartz://myGroup/CbRateDicTimer?cron=0+0+0+?+*+*+*&trigger.misfireInstruction=2")
                 .setBody().constant("event")
                 .log("${body}")
                 .to("direct:startCbRateDictLoading")
