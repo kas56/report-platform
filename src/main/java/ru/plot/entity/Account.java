@@ -11,6 +11,7 @@ import javax.persistence.*;
 @Table(schema = "h2020", name = "accounts")
 public class Account {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_accounts")
     private Long idAccounts;
 

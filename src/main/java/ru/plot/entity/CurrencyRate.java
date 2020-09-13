@@ -16,8 +16,7 @@ public class CurrencyRate {
 
     @Id
     @Column(name = "id_curs_val_cb")
-    @SequenceGenerator(name = "id_curs_val_cb_seq",schema = "h2020", sequenceName = "curs_val_cb_id_curs_val_cb_seq")
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "id_curs_val_cb_seq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private BigInteger id;
 
     @ManyToOne

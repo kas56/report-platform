@@ -3,10 +3,7 @@ package ru.plot.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Getter
@@ -16,6 +13,7 @@ import java.util.Date;
 public class DataDayReport {
     @Id
     @Column(name = "npp")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer npp;
     @Column(name = "d_date_balance")
     private Date dateBalance;

@@ -15,11 +15,7 @@ import java.sql.Timestamp;
 public class VReportHeader {
 
 @Id
-//TODO: Define generator PK
-//@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_...")
-//@SequenceGenerator(name = "SEQ_...", sequenceName = "SEQ_...", allocationSize = 1)
-  // id отчёта, для которого формируется шапка)
-  @Column(name = "id_report") private BigInteger id;
+@Column(name = "id_report") private BigInteger idReport;
   // данные ответственного за формирование отчёта
   @Column(name = "responsible_pers") private String responsiblePers;
   // дата фрмирования отчёта
@@ -28,5 +24,15 @@ public class VReportHeader {
   @Column(name = "list_org") private String listOrg;
   // список ИНН
   @Column(name = "list_inn") private String listInn;
+  // фамилия
+  @Column(name = "s_secondname") private String secondname;
+  // имя
+  @Column(name = "s_firstname") private String firstname;
+  // отчество
+  @Column(name = "s_middlename") private String middlename;
+  // e-mail
+  @Column(name = "s_user_email") private String userEmail;
+  // телефон
+  @Column(name = "s_user_phone") private String userPhone;
 
 }

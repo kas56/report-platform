@@ -3,10 +3,7 @@ package ru.plot.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
@@ -18,10 +15,7 @@ import java.time.LocalDate;
 public class BalanceAccount {
 
 @Id
-//TODO: Define generator PK
-//@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_...")
-//@SequenceGenerator(name = "SEQ_...", sequenceName = "SEQ_...", allocationSize = 1)
-  // id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id_balance_account") private BigInteger id;
   // ссылка на счёт
   @Column(name = "id_account") private BigInteger idAccount;

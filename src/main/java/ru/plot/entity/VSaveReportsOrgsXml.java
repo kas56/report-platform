@@ -1,4 +1,4 @@
-package com.sample;
+package ru.plot.entity;
 
 import lombok.Getter;
 import lombok.Setter;

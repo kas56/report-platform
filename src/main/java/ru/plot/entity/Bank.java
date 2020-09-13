@@ -13,8 +13,7 @@ import java.util.List;
 public class Bank {
     @Id
     @Column(name = "id_bank")
-    @SequenceGenerator(name = "banks_id_seq", sequenceName = "banks_id_seq")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "banks_id_seq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "s_swift")

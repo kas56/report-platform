@@ -51,9 +51,6 @@
                     </xsd:sequence>
                 </xsd:complexType>
             </xsd:element>
-            <xsd:element name="bik" type="xsd:string" />
-            <xsd:element name="bankName" type="xsd:string" />
-            <xsd:element name="comment" type="xsd:string" />
         </xsd:sequence>
     </xsd:complexType>
 

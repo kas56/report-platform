@@ -11,8 +11,11 @@ import ru.plot.entity.CurrencyRate;
 import ru.plot.repo.CurrencyRateRepository;
 import ru.plot.service.PermissionService;
 
+import javax.annotation.security.RolesAllowed;
+
 @Controller
 @RequestMapping("/catalog")
+@RolesAllowed("ROLE_ADMIN")
 public class CatalogController {
 
     @Autowired

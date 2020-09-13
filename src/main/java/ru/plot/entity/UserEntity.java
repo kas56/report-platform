@@ -1,13 +1,27 @@
 package ru.plot.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
+import org.apache.camel.util.StreamUtils;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
-public class UserEntity {
+@Getter
+@Setter
+@Table(name = "users", schema = "h2020")
+public class UserEntity implements UserDetails {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_users")
     private Long idUser;
 
@@ -42,91 +56,37 @@ public class UserEntity {
     @Column(name = "s_roles")
     private String roles;
 
-    public Long getIdUser() {
-        return idUser;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if (roles == null) return null;
+
+        List<SimpleGrantedAuthority> collect = Arrays.stream(roles.split(",")).map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+        return collect;
     }
 
-    public void setIdUser(Long idUser) {
-        this.idUser = idUser;
+    @Override
+    public String getUsername() {
+        return this.email;
     }
 
-    public String getDtUpdate() {
-        return dtUpdate;
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
     }
 
-    public void setDtUpdate(String dtUpdate) {
-        this.dtUpdate = dtUpdate;
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
     }
 
-    public Long getOrgId() {
-        return orgId;
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
     }
 
-    public void setOrgId(Long orgId) {
-        this.orgId = orgId;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getMiddleName() {
-        return middleName;
-    }
-
-    public void setMiddleName(String middleName) {
-        this.middleName = middleName;
-    }
-
-    public String getPosition() {
-        return position;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getRoles() {
-        return roles;
-    }
-
-    public void setRoles(String roles) {
-        this.roles = roles;
-    }
-
-    public String getSalt() {
-        return salt;
-    }
-
-    public void setSalt(String salt) {
-        this.salt = salt;
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

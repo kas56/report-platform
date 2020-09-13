@@ -16,10 +16,7 @@ import java.sql.Timestamp;
 public class Reports {
 
 @Id
-//TODO: Define generator PK
-//@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_...")
-//@SequenceGenerator(name = "SEQ_...", sequenceName = "SEQ_...", allocationSize = 1)
-  // id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id_report") private BigInteger id;
   // дата, на которую создан отчёт
   @Column(name = "dt_date_report") private LocalDate dateReport;

@@ -3,10 +3,7 @@ package ru.plot.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -14,6 +11,7 @@ import javax.persistence.Table;
 @Table(schema = "h2020", name = "oksm")
 public class Oksm {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_oksm")
     private Long idOksm;
     @Column(name = "s_code")

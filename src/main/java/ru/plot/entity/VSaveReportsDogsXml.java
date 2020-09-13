@@ -1,4 +1,4 @@
-package com.sample;
+package ru.plot.entity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -41,6 +41,6 @@ public class VSaveReportsDogsXml {
   // null
   @Column(name = "s_val_code_dog") private String valCodeDog;
   // null
-  @Column(name = "f_oper_sum") private String fOperSum;
+  @Column(name = "f_oper_sum") private BigDecimal operSum;
 
 }

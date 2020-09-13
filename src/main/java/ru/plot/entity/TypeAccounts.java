@@ -15,10 +15,7 @@ import java.sql.Timestamp;
 public class TypeAccounts {
 
 @Id
-//TODO: Define generator PK
-//@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_...")
-//@SequenceGenerator(name = "SEQ_...", sequenceName = "SEQ_...", allocationSize = 1)
-  // id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id_type_accounts") private BigInteger id;
   // код вида счёта
   @Column(name = "s_code") private String code;

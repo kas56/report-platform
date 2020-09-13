@@ -9,7 +9,9 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import ru.plot.auth.AuthenticationProvider;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import ru.plot.auth.CustomAuthenticationProvider;
+import ru.plot.service.UserService;
 
 import java.util.Arrays;
 
@@ -19,17 +21,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private MyAccessDeniedHandler accessDeniedHandler;
-
     @Autowired
-    public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("admin").password("{noop}admin").roles("ADMIN");
-        auth.inMemoryAuthentication().withUser("user").password("{noop}user").roles("USER");
-    }
+    UserService userService;
 
-    @Override
     @Bean
-    protected AuthenticationManager authenticationManager() throws Exception {
-        return new ProviderManager(Arrays.asList((AuthenticationProvider) new AuthenticationProvider()));
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
     // роль admin всегда есть доступ к /admin/**
@@ -40,11 +37,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "/index", "/about","/css/**","/js/**", "/webjars/**", "/**").permitAll()
-                //.antMatchers("/securityPath").authenticated()
-                //.antMatchers("/admin/**").hasAnyRole("ADMIN")
-                //.antMatchers("/user/**").hasAnyRole("USER")
-               // .anyRequest().authenticated()
+                .antMatchers("/favicon.ico","/403","/css/**","/js/**", "/webjars/**", "/api/public/login/login").permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
@@ -54,5 +48,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .exceptionHandling().accessDeniedHandler(accessDeniedHandler);
+    }
+
+    @Autowired
+    protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder());
     }
 }

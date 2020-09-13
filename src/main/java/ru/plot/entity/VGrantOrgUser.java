@@ -15,11 +15,7 @@ import java.sql.Timestamp;
 public class VGrantOrgUser {
 
 @Id
-//TODO: Define generator PK
-//@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_...")
-//@SequenceGenerator(name = "SEQ_...", sequenceName = "SEQ_...", allocationSize = 1)
-  // id пользователя
-  @Column(name = "id_users") private BigInteger id;
+@Column(name = "id_users") private BigInteger id;
   // имя пользователя
   @Column(name = "s_firstname") private String firstname;
   // фамилия пользователя

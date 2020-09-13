@@ -3,10 +3,7 @@ package ru.plot.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Getter
@@ -16,6 +13,7 @@ import java.util.Date;
 public class Banks {
     @Id
     @Column(name = "id_bank")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idBank;
     @Column(name = "s_bik")
     private String bik;

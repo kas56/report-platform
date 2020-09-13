@@ -22,6 +22,7 @@ import ru.plot.entity.Organizations;
 import ru.plot.repo.OkvRepository;
 import ru.plot.repo.OrganizationsRepository;
 
+import javax.annotation.security.RolesAllowed;
 import java.io.*;
 import java.util.List;
 import java.io.File;
@@ -30,6 +31,7 @@ import java.io.IOException;
 
 @Controller
 @RequestMapping("/report")
+@RolesAllowed("ROLE_ADMIN")
 public class ReportController {
 
     @Autowired
