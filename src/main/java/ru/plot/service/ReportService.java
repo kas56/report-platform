@@ -1,12 +1,11 @@
 package ru.plot.service;
 
-import ru.plot.dto.ReportDto;
-import ru.plot.entity.VSaveReportsValbalXml;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.plot.dto.ReportDto;
 import ru.plot.entity.*;
-import ru.plot.jaxb.rosatom.*;
 import ru.plot.jaxb.rosatom.Bank;
+import ru.plot.jaxb.rosatom.*;
 import ru.plot.repo.*;
 
 import javax.xml.datatype.DatatypeConfigurationException;
@@ -117,6 +116,10 @@ public class ReportService {
 
 
 
+    }
+
+    public List<Reports> getAllReports () {
+        return reportRepository.findAll();
     }
 
 

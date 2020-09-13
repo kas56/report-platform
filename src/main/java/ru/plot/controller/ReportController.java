@@ -14,29 +14,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 import ru.plot.dto.ReportDto;
-import ru.plot.entity.Okv;
-import ru.plot.entity.Organizations;
 import ru.plot.entity.*;
 import ru.plot.repo.OkvRepository;
 import ru.plot.repo.OrganizationsRepository;
-import ru.plot.repo.*;
-import ru.plot.service.PermissionService;
-import ru.plot.repo.OkvRepository;
-import ru.plot.repo.OrganizationsRepository;
+import ru.plot.repo.ReportDetailRepository;
+import ru.plot.repo.ReportsRepository;
 import ru.plot.service.ReportService;
 
 import javax.annotation.security.RolesAllowed;
-import java.io.*;
-import java.math.BigInteger;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,20 +50,13 @@ public class ReportController {
 
     @Autowired
     private ReportsRepository reportsRepository;
+
     @Autowired
     private ReportService reportService;
-
-    private PermissionService permissionService;
-
-    @Autowired
-    public ReportController(PermissionService permissionService) {
-        this.permissionService = permissionService;
-    }
 
     @RequestMapping(value = { "", "/" }, method = RequestMethod.GET)
     public String getIndexPage(Model model) {
         model.addAttribute("message", "Noname foundation");
-        model.addAttribute("perms", permissionService.getUserPermissions());
 
         return "/report";
     }
@@ -81,13 +65,21 @@ public class ReportController {
         UserEntity principal = (UserEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<Reports> reports = reportsRepository.findByUser(principal);
         model.addAttribute("reports", reports);
-        model.addAttribute("perms", permissionService.getUserPermissions());
         return "/report/balances";
+    }
+
+    @GetMapping("/all")
+    public String reportAll(Model model) {
+
+//        UserEntity principal = (UserEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List<Reports> reports = reportService.getAllReports();
+        model.addAttribute("reportsList", reports);
+
+        return "/report/all";
     }
 
     @GetMapping("/balance/{id}")
     public String balanceCard(Model model) {
-        model.addAttribute("perms", permissionService.getUserPermissions());
 
         return "/report/balance";
     }
@@ -121,10 +113,7 @@ public class ReportController {
         Iterable<Okv> okvCodes = okvRepository.findAll();
         model.addAttribute("okvCodes", okvCodes);
         model.addAttribute("userId", principal.getIdUser());
-        model.addAttribute("userId", principal.getIdUser());
-        model.addAttribute("perms", permissionService.getUserPermissions());
-
-        model.addAttribute("perms", permissionService.getUserPermissions());
+        model.addAttribute("reportDetails", new ArrayList<>());
 
         return "/report/balance-form";
         }

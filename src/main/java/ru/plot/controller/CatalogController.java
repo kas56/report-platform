@@ -15,10 +15,8 @@ import ru.plot.repo.BankDogRepository;
 import ru.plot.repo.CurrencyRateRepository;
 import ru.plot.repo.OrganizationsRepository;
 import ru.plot.service.BankService;
-import ru.plot.service.PermissionService;
 
 import javax.annotation.security.RolesAllowed;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -35,18 +33,11 @@ public class CatalogController {
     @Autowired
     private BankDogRepository bankDogRepository;
 
-    private PermissionService permissionService;
-
-    @Autowired
-    public CatalogController(PermissionService permissionService) {
-        this.permissionService = permissionService;
-    }
 
     @RequestMapping(value = { "", "/" }, method = RequestMethod.GET)
     public String getIndexPage(Model model) {
         model.addAttribute("message", "Noname foundation");
-        model.addAttribute("perms", permissionService.getUserPermissions());
-        System.out.println(permissionService.getUserPermissions().isAdmin());
+
         return "/catalog";
     }
 
@@ -56,7 +47,6 @@ public class CatalogController {
         Iterable<CurrencyRate> currencyRates = currencyRateRepository.findAll();
 
         model.addAttribute("currencyRates", currencyRates);
-        model.addAttribute("perms", permissionService.getUserPermissions());
 
         return "/catalog/CurrencyRates";
     }
