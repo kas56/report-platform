@@ -39,7 +39,7 @@ public class ReportDetails {
   // валюта счетов в банке
   @Column(name = "s_val_code") private String valCode;
   // остаток по счетам в банке
-  @Column(name = "f_balance_summ") private String fBalanceSumm;
+  @Column(name = "f_balance_summ") private BigDecimal balanceSumm;
   // вид договора
   @Column(name = "s_type_dog") private String typeDog;
   // дата подписания договора
@@ -53,7 +53,7 @@ public class ReportDetails {
   // валюта договора (такая же как валюта счетов в банке)
   @Column(name = "s_val_code_dog") private String valCodeDog;
   // сумма по договору
-  @Column(name = "f_oper_sum") private String fOperSum;
+  @Column(name = "f_oper_sum") private BigDecimal operSum;
   // номер строки по порядку (для одинакового показа архивных отчётов требуется сортировка по данному полю)
   @Column(name = "i_npp") private BigInteger npp;
 
