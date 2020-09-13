@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="custom-file">
                     <input type="file" class="custom-file-input" id="validatedCustomFile" required>
-                    <label class="custom-file-label" for="validatedCustomFile">Выбирете файл...</label>
+                    <label class="custom-file-label" for="validatedCustomFile">Выберите файл...</label>
                 </div>
             </div>
             <div class="row">
@@ -32,16 +32,31 @@
                 <thead class="thead-dark">
                 <tr>
                     <th>ID</th>
-                    <th>Наименование организации </th>
-                    <th>БИК </th>
+                    <th>Наименование организации</th>
+                    <th>ИНН</th>
+                    <th>КПП</th>
+                    <th>ОГРН</th>
+                    <th>Адрес</th>
+                    <th>Телефон</th>
+                    <th>Дата постановки на учет</th>
+                    <th>ОКАТО</th>
+                    <th>ОКТМО</th>
+                    <th>ОКПО</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each ="bic : ${orgs}">
-                    <td th:utext="${bic.id}">...</td>
-                    <td th:utext="${bic.shortname}">...</td>
-                    <td th:utext="${bic.bic}">...</td>
-                </tr>
+                <tr th:each ="org : ${orgs}">
+                    <td th:utext="${org.id}">...</td>
+                    <td th:utext="${org.shortName}">...</td>
+                    <td th:utext="${org.orgInn}">...</td>
+                    <td th:utext="${org.orgKpp}">...</td>
+                    <td th:utext="${org.orgOgrn}">...</td>
+                    <td th:utext="${org.jurAddress}">...</td>
+                    <td th:utext="${org.phone}">...</td>
+                    <td th:utext="${org.registration}">...</td>
+                    <td th:utext="${org.okato}">...</td>
+                    <td th:utext="${org.oktmo}">...</td>
+                    <td th:utext="${org.okpo}">...</td>
                 </tr>
                 </tbody>
             </table>
