@@ -152,12 +152,13 @@ public class ReportController {
             row.createCell(8).setCellValue(reportDetail.getComment());
             row.createCell(9).setCellValue(reportDetail.getValCode());
             row.createCell(10).setCellValue(reportDetail.getBalanceSumm().toString());
-            row.createCell(11).setCellValue(reportDetail.getSignDog().toString());
-            row.createCell(12).setCellValue(reportDetail.getStartDog().toString());
-            row.createCell(13).setCellValue(reportDetail.getEndDog().toString());
-            row.createCell(14).setCellValue(reportDetail.getPercent().toString());
-            row.createCell(15).setCellValue(reportDetail.getValCodeDog());
-            row.createCell(16).setCellValue(reportDetail.getOperSum().toString());
+            row.createCell(11).setCellValue(reportDetail.getTypeDog());
+            row.createCell(12).setCellValue(reportDetail.getSignDog().toString());
+            row.createCell(13).setCellValue(reportDetail.getStartDog().toString());
+            row.createCell(14).setCellValue(reportDetail.getEndDog().toString());
+            row.createCell(15).setCellValue(reportDetail.getPercent().toString());
+            row.createCell(16).setCellValue(reportDetail.getValCodeDog());
+            row.createCell(17).setCellValue(reportDetail.getOperSum().toString());
 
         }
 
