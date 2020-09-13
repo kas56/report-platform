@@ -50,6 +50,8 @@ public class ReportController {
 
     @Autowired
     private OkvRepository okvRepository;
+    @Autowired
+    private BankRepository bankRepository;
 
     @Autowired
     private ReportsRepository reportRepository;
@@ -61,6 +63,8 @@ public class ReportController {
     private ReportsRepository reportsRepository;
     @Autowired
     private ReportService reportService;
+    @Autowired
+    private TypeDogRepository typeDogRepository;
 
     private PermissionService permissionService;
 
@@ -100,6 +104,7 @@ public class ReportController {
             Reports report = new Reports();
             report.setDateReport(LocalDate.now());
             report.setIdUser(principal.getIdUser());
+            report.setStatus(Status.DRAFT);
             Reports save = reportsRepository.save(report);
             return "redirect:/report/balance/form?reportId="+save.getId();
         } else {
@@ -113,17 +118,15 @@ public class ReportController {
             reportDetail.setReportId(report.getId());
             model.addAttribute("reportDetail", reportDetail);
 
-            //Справочник организаций
-        List<Organizations> organizations = organizationsRepository.findAll();
-        model.addAttribute("organizations", organizations);
+        model.addAttribute("organizations", principal.getGrantOrgs());
+        model.addAttribute("banks", bankRepository.findAll());
+        model.addAttribute("typeDogs", typeDogRepository.findAll());
 
         //Справочник валют
         Iterable<Okv> okvCodes = okvRepository.findAll();
         model.addAttribute("okvCodes", okvCodes);
         model.addAttribute("userId", principal.getIdUser());
         model.addAttribute("userId", principal.getIdUser());
-        model.addAttribute("perms", permissionService.getUserPermissions());
-
         model.addAttribute("perms", permissionService.getUserPermissions());
 
         return "/report/balance-form";

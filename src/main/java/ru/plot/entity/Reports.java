@@ -31,7 +31,8 @@ public class Reports {
   @Column(name = "s_comment") private String comment;
 
   // статус
-  //@Column(name = "s_status") private Status status;
+  @Enumerated(EnumType.STRING)
+  @Column(name = "s_status") private Status status;
 
   @OneToMany (mappedBy = "report", cascade = CascadeType.ALL)
   private List<ReportDetails> reportDetails;

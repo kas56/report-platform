@@ -35,6 +35,15 @@ public class UserEntity implements UserDetails {
     @JoinColumn(name = "id_org", insertable = false, updatable = false)
     private Organizations organization;
 
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name="grant_org_user", schema = "h2020" ,
+            joinColumns = @JoinColumn( name="id_user"),
+            inverseJoinColumns = @JoinColumn( name="id_org")
+    )
+    private List<Organizations> grantOrgs;
+
+
     @Column(name = "s_firstname")
     private String firstName;
 

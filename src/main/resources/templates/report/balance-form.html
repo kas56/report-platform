@@ -42,16 +42,36 @@
                                         <!--<small id="legalIdHelp" class="form-text text-muted">Выбор юридического лица</small>-->
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-xs-12 col-sm-6">
                                     <div class="form-group">
-                                        <label for="bankBik">БИК банка</label>
-                                        <input type="text" class="form-control" id="bankBik" name="bankBik" th:field="*{bankBik}"><!--th:field="*{bankBik}"-->
+                                        <label for="legalId">Банк</label>
+                                        <select class="form-control form-control-sm" id="bankId" name="bankId" th:field="*{bankId}"><!---->
+                                            <option value="" selected="selected"></option>
+                                            <option th:each="bank : ${banks}"
+                                                    th:value="${bank.id}"
+                                                    th:text="${bank.namep + '('+bank.bik+')'}">
+                                            </option>
+                                        </select>
+                                        <!--<small id="legalIdHelp" class="form-text text-muted">Выбор юридического лица</small>-->
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="bankName">Наименование банка</label>
-                                <input type="text" class="form-control" id="bankName" name="bankName" th:field="*{bankName}"><!--th:field="*{bankName}"-->
+                            <div class="row">
+
+                            <div class="col-xs-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="bankBik">БИК банка</label>
+                                        <input type="text" class="form-control" readonly id="bankBik" name="bankBik" th:field="*{bankBik}"><!--th:field="*{bankBik}"-->
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="bankName">Наименование банка</label>
+                                        <input type="text" class="form-control" readonly id="bankName" name="bankName" th:field="*{bankName}"><!--th:field="*{bankName}"-->
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="commentText">Комментарий</label>
@@ -64,7 +84,7 @@
                                         <option value="" selected="selected"></option>
                                         <option th:each="okv : ${okvCodes}"
                                                 th:value="${okv.id}"
-                                                th:text="${okv.charcode}">
+                                                th:text="${okv.name +'('+okv.getCharcode()+')'}">
                                         </option>
                                     </select>
                                 </div>
@@ -74,8 +94,15 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="contractType">Вид договора</label>
-                                <input type="text" class="form-control" id="contractType" name="contractType" th:field="*{typeDog}"> <!--th:field="*{typeDog}"-->
+                                <label for="legalId">Вид договора</label>
+                                <select class="form-control form-control-sm" id="typeDogId" name="typeDogId" th:field="*{typeDogId}"><!---->
+                                    <option value="" selected="selected"></option>
+                                    <option th:each="typeDog : ${typeDogs}"
+                                            th:value="${typeDog.id}"
+                                            th:text="${typeDog.nameType}">
+                                    </option>
+                                </select>
+                                <!--<small id="legalIdHelp" class="form-text text-muted">Выбор юридического лица</small>-->
                             </div>
                             <div class="row">
                                 <div class="col-xs-12 col-sm-4">
@@ -108,7 +135,7 @@
                                     <select class="form-control form-control-sm"  id="amountCurrencyId" name="amountCurrencyId" th:field="*{valCodeDog}">
                                         <option th:each="okv : ${okvCodes}"
                                                 th:value="${okv.id}"
-                                                th:text="${okv.charcode}"><!--th:field="*{valCodeDog}"-->
+                                                th:text="${okv.name +'('+okv.getCharcode()+')'}"><!--th:field="*{valCodeDog}"-->
                                         </option>
                                     </select>
                                 </div>
@@ -150,9 +177,9 @@
                 <tbody>
                 <tr th:each ="detail : ${report.reportDetails}">
                     <td th:utext="${detail.npp}">...</td>
-                    <td th:utext="${detail.orgName}">...</td>
-                    <td th:utext="${detail.bankName}">...</td>
-                    <td th:utext="${detail.bankBik}">...</td>
+                    <td th:utext="${detail.organization?.fullName}">...</td>
+                    <td th:utext="${detail.bank?.namep}">...</td>
+                    <td th:utext="${detail.bank?.bik}">...</td>
                     <td th:utext="${detail.balanceSumm}">...</td>
                 </tr>
                 </tr>

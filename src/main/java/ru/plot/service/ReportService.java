@@ -21,6 +21,10 @@ public class ReportService {
     @Autowired
     ReportsRepository reportRepository;
     @Autowired
+    BankRepository bankRepository;
+    @Autowired
+    TypeDogRepository typeDogRepository;
+    @Autowired
     VReportHeaderRepository vReportHeaderRepository;
     @Autowired
     VSaveReportsOrgsXmlRepository vSaveReportsOrgsXmlRepository;
@@ -131,16 +135,33 @@ public class ReportService {
         ReportDetails details = new ReportDetails();
         details.setNpp(report.getReportDetails().size()+1);
         details.setBalanceSumm(rep.getBalanceSumm());
-        details.setBankBik(rep.getBankBik());
-        details.setBankName(rep.getBankName());
+        Optional<ru.plot.entity.Bank> byId1 = bankRepository.findById(rep.getBankId());
+        if(byId1.isPresent()) {
+            ru.plot.entity.Bank bank = byId1.get();
+            details.setBank(bank);
+            details.setBankName(bank.getNamep());
+            details.setBankBik(bank.getBik());
+        }
         details.setComment(rep.getComment());
         details.setEndDog(rep.getEndDog());
         details.setOperSum(rep.getOperSum());
-       // details.set(rep.getOrgId());
+        Optional<Organizations> byId2 = organizationsRepository.findById(rep.getOrgId());
+        if (byId2.isPresent()) {
+            Organizations org = byId2.get();
+            details.setOrganization(byId2.get());
+            details.setOrgInn(org.getOrgInn());
+            details.setOrgKpp(org.getOrgKpp());
+            details.setOrgName(org.getFullName());
+        }
+        Optional<TypeDog> byId3 = typeDogRepository.findById(rep.getTypeDogId());
+        if(byId3.isPresent()) {
+            details.setTypeDog(byId3.get());
+            details.setTypeDogName(byId3.get().getNameType());
+
+        }
         details.setPercent(rep.getPercent());
         details.setSignDog(rep.getSignDog());
         details.setStartDog(rep.getStartDog());
-        details.setTypeDog(rep.getTypeDog());
         details.setValCode(rep.getValCode());
         details.setValCodeDog(rep.getValCodeDog());
         details.setReport(report);

@@ -17,6 +17,10 @@ public class ReportDto {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dateReport;
 
+    private BigInteger bankId;
+
+    private BigInteger typeDogId;
+
     private BigInteger orgId;
     // БИК банка
     private String bankBik;

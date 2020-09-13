@@ -39,7 +39,7 @@ public class ReportDetails {
   // остаток по счетам в банке
   @Column(name = "f_balance_summ") private BigDecimal balanceSumm;
   // вид договора
-  @Column(name = "s_type_dog") private String typeDog;
+  @Column(name = "s_type_dog") private String typeDogName;
   // дата подписания договора
   @Column(name = "d_sign_dog") private LocalDate signDog;
   // дата начал действия договора
@@ -58,4 +58,15 @@ public class ReportDetails {
   @ManyToOne
   @JoinColumn(name = "id_report")
   private Reports report;
+
+  @ManyToOne
+  @JoinColumn(name = "id_bank")
+  private Bank bank;
+
+  @ManyToOne
+  @JoinColumn(name = "id_org")
+  private Organizations organization;
+  @ManyToOne
+  @JoinColumn(name = "id_type_dog")
+  private TypeDog typeDog;
 }

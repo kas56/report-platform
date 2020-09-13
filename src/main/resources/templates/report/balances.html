@@ -55,12 +55,17 @@
                 <td th:utext="${report.user.position}">...</td>
                 <td th:utext="${report.user.organization.shortName}">...</td>
                 <td th:utext="${report.dateReport}">...</td>
-                <td>Черновик</td>
                 <td>
-                    <a class="nav-link" th:href="@{'/report/balance/form?reportId='+${report.id}}">
-                        <button type="button" class="btn btn-secondary">Редактировать</button>
-                    </a>
-                    <button type="button" class="btn btn-primary">Отправить</button>
+                    <span th:if="${report.status == 'DRAFT' || report.status == null}">Черновик</span>
+                    <span th:if="${report.status == 'SENT'}">Принято центром</span>
+                </td>
+                <td th:width="70px">
+                    <div th:if="${report.status == 'DAFT' || report.status == null}">
+                        <a class="nav-link" th:href="@{'/report/balance/form?reportId='+${report.id}}">
+                            <button type="button" class="btn btn-secondary">Редактировать</button>
+                        </a>
+                        <button type="button" class="btn btn-primary">Отправить</button>
+                    </div>
                 </td>
             </tr>
         </table>

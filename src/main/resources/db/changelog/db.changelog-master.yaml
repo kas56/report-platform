@@ -117,3 +117,20 @@ databaseChangeLog:
       #
       file: /db/changelog/39_bank_bic.sql
 
+  - include:
+      #
+      file: /db/changelog/40_insert_test_orgs.sql
+
+  - include:
+      #
+      file: /db/changelog/42_add_report_state.sql
+
+  - include:
+      #
+      file: /db/changelog/45_alter_v_report_header.sql
+
+
+  - include:
+      #
+      file: /db/changelog/45_1_link_bank.sql
+
