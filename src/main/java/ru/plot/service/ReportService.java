@@ -8,9 +8,15 @@ import ru.plot.jaxb.rosatom.Bank;
 import ru.plot.jaxb.rosatom.*;
 import ru.plot.repo.*;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.io.StringWriter;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,7 +46,7 @@ public class ReportService {
     @Autowired
     OrganizationsRepository organizationsRepository;
 
-    public ReportBalance convertToXml(Reports report) throws DatatypeConfigurationException {
+    public ReportBalance convertToJaxb(Reports report) throws DatatypeConfigurationException {
 
         ReportBalance reportBalance = new ReportBalance();
 
@@ -48,7 +54,7 @@ public class ReportService {
         if (vReportHeader.isPresent()) {
             VReportHeader reportHeader = vReportHeader.get();
 
-            XMLGregorianCalendar xmlDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(reportHeader.getDateReport());
+            XMLGregorianCalendar xmlDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(report.getDateReport().toString());
             reportBalance.setOnDate(xmlDate);
             CompilerReport compilerReport = new CompilerReport();
             compilerReport.setOrgName(reportHeader.getListOrg());
@@ -121,6 +127,21 @@ public class ReportService {
 
 
     }
+
+    public String getXmlString (String id) throws DatatypeConfigurationException, JAXBException {
+        Optional<Reports> reportsO = reportRepository.findById(BigInteger.valueOf(Long.valueOf(id)));
+        if (reportsO.isPresent()) {
+            ReportBalance reportBalance = convertToJaxb(reportsO.get());
+            JAXBContext jaxbContext = JAXBContext.newInstance(ReportBalance.class);
+            ObjectFactory objectFactory = new ObjectFactory();
+            JAXBElement<ReportBalance> response = objectFactory.createReportBalance(reportBalance);
+            Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+            StringWriter sw = new StringWriter();
+            jaxbMarshaller.marshal(response, sw);
+            return sw.toString();
+        }
+         return null;
+    };
 
     public List<Reports> getAllReports () {
         return reportRepository.findAll();
