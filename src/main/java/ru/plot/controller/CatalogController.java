@@ -9,12 +9,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import ru.plot.entity.CurrencyRate;
+import ru.plot.entity.Organizations;
 import ru.plot.repo.CurrencyRateRepository;
+import ru.plot.repo.OrganizationsRepository;
 import ru.plot.service.BankService;
 import ru.plot.service.PermissionService;
 
 import javax.annotation.security.RolesAllowed;
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/catalog")
@@ -25,7 +28,8 @@ public class CatalogController {
     CurrencyRateRepository currencyRateRepository;
     @Autowired
     private BankService bankService;
-
+    @Autowired
+    private OrganizationsRepository organizationsRepository;
 
     private PermissionService permissionService;
 
@@ -77,7 +81,8 @@ public class CatalogController {
     }
     @GetMapping("/Organizations")
     public String Organizations(Model model) {
-        model.addAttribute("orgs", new ArrayList<>());
+        List<Organizations> orgs =  organizationsRepository.findAll();
+        model.addAttribute("orgs", orgs);
         return "/catalog/Organizations.html";
     }
 }
