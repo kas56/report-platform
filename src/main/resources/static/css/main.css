@@ -6,6 +6,14 @@ h2{
     color: #ff171c;
 }
 
+h2.black{
+    color: #000;
+}
+
 footer{
     margin-top:60px;
+}
+
+td .nav-link {
+    padding: 0;
 }

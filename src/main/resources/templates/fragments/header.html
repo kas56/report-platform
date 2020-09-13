@@ -1,4 +1,4 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <div th:fragment="header-css">
         <!-- this is header-css -->
@@ -37,15 +37,8 @@
                 <li sec:authorize="hasRole('ADMIN')" class="nav-item active">
                     <a class="nav-link" th:href="@{/settings}">Настройки<span class="sr-only">(current)</span></a>
                 </li>
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Отчеты
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" th:href="@{/report/balance}">Остатки на счетах</a>
-                        <div class="dropdown-divider"></div>
-                    </div>
+                <li sec:authorize="hasRole('AUDITOR')" class="nav-item active">
+                    <a class="nav-link" th:href="@{/report/all}">Отчеты<span class="sr-only">(current)</span></a>
                 </li>
 
                <!-- <li class="nav-item">

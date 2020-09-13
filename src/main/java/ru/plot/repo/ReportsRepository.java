@@ -8,5 +8,7 @@ import java.math.BigInteger;
 import java.util.List;
 
 public interface ReportsRepository extends CrudRepository<Reports, BigInteger> {
+
+    List<Reports> findAll();
     List<Reports> findByUser(UserEntity entity);
 }
