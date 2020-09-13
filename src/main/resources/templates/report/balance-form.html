@@ -14,111 +14,112 @@
 
 <div class="container">
     <span>Форма отчета</span>
+    <form action="#" th:action="@{/report/reportDetails}" th:object="${reportDetails}" method="post">
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+        <div class="card-body">
+            <!--Срытые инпуты-->
+            <input id="email" name="email" type="hidden" > <!--th:field="*{email}"-->
+            <input id="reportDate" name="reportDate" type="hidden" > <!--th:field="*{reportDate}"-->
 
-    <div class="card-body">
-        <!--Срытые инпуты-->
-        <input id="email" name="email" type="hidden" > <!--th:field="*{email}"-->
-        <input id="reportDate" name="reportDate" type="hidden" > <!--th:field="*{reportDate}"-->
-
-        <div class="table-responsive">
-
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm">
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-6">
-                                <div class="form-group">
-                                    <label for="legalId">Организация</label>
-                                    <select class="form-control form-control-sm" id="legalId" name="legalId" ><!--th:field="*{orgId}"-->
+            <div class="table-responsive">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="legalId">Организация</label>
+                                        <select class="form-control form-control-sm" id="legalId" name="legalId" ><!--th:field="*{orgId}"-->
+                                            <option value="" selected="selected"></option>
+                                            <option th:each="org : ${organizations}"
+                                                    th:value="${org.id}"
+                                                    th:text="${org.shortName}">
+                                            </option>
+                                        </select>
+                                        <!--<small id="legalIdHelp" class="form-text text-muted">Выбор юридического лица</small>-->
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="bankBik">БИК банка</label>
+                                        <input type="text" class="form-control" id="bankBik" name="bankBik" th:field="*{bankBik}"><!--th:field="*{bankBik}"-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="bankName">Наименование банка</label>
+                                <input type="text" class="form-control" id="bankName" name="bankName" ><!--th:field="*{bankName}"-->
+                            </div>
+                            <div class="form-group">
+                                <label for="commentText">Комментарий</label>
+                                <textarea class="form-control" id="commentText" name="commentText" ></textarea><!--th:field="*{comment}"-->
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6">
+                                    <label for="currencyId">Валюта</label>
+                                    <select class="form-control form-control-sm" id="currencyId" name="currencyId" > <!--th:field="*{valCode}"-->
                                         <option value="" selected="selected"></option>
-                                        <option th:each="org : ${organizations}"
-                                                th:value="${org.id}"
-                                                th:text="${org.shortName}">
+                                        <option th:each="okv : ${okvCodes}"
+                                                th:value="${okv.id}"
+                                                th:text="${okv.charcode}">
                                         </option>
                                     </select>
-                                    <!--<small id="legalIdHelp" class="form-text text-muted">Выбор юридического лица</small>-->
+                                </div>
+                                <div class="col-xs-12 col-sm-6">
+                                    <label for="amountCurrency">Cумма в валюте счета</label>
+                                    <input class="form-control" id="amountCurrency" name="amountCurrency" ><!--th:field="*{BalanceSumm}"-->
                                 </div>
                             </div>
-                            <div class="col-xs-12 col-sm-6">
-                                <div class="form-group">
-                                    <label for="bankBik">БИК банка</label>
-                                    <input type="text" class="form-control" id="bankBik" name="bankBik" ><!--th:field="*{bankBik}"-->
+                            <div class="form-group">
+                                <label for="contractType">Вид договора</label>
+                                <input type="text" class="form-control" id="contractType" name="contractType"> <!--th:field="*{typeDog}"-->
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-4">
+                                    <div class="form-group">
+                                        <label for="signContractDate">Дата заключения договора</label>
+                                        <input type="date" class="form-control" id="signContractDate" name="signContractDate" > <!--th:field="*{signDog}"-->
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-4">
+                                    <div class="form-group">
+                                        <label for="beginContractDate">Дата начала действия договора</label>
+                                        <input type="date" class="form-control" id="beginContractDate" name="beginContractDate" > <!--th:field="*{startDog}"-->
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-4">
+                                    <div class="form-group">
+                                        <label for="endContractDate">Дата окончания договора</label>
+                                        <input type="date" class="form-control" id="endContractDate" name="endContractDate" > <!--th:field="*{endDog}"-->
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="bankName">Наименование банка</label>
-                            <input type="text" class="form-control" id="bankName" name="bankName" ><!--th:field="*{bankName}"-->
-                        </div>
-                        <div class="form-group">
-                            <label for="commentText">Комментарий</label>
-                            <textarea class="form-control" id="commentText" name="commentText" ></textarea><!--th:field="*{comment}"-->
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-6">
-                                <label for="currencyId">Валюта</label>
-                                <select class="form-control form-control-sm" id="currencyId" name="currencyId" > <!--th:field="*{valCode}"-->
-                                    <option value="" selected="selected"></option>
-                                    <option th:each="okv : ${okvCodes}"
-                                            th:value="${okv.id}"
-                                            th:text="${okv.charcode}">
-                                    </option>
-                                </select>
+                            <div class="form-group">
+                                <label for="percent">Расчетная ставка годовых, %</label>
+                                <input type="number"  value="1000" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100"
+                                       class="form-control currency" id="percent" /> <!--th:field="*{percent}"-->
                             </div>
-                            <div class="col-xs-12 col-sm-6">
-                                <label for="amountCurrency">Cумма в валюте счета</label>
-                                <input class="form-control" id="amountCurrency" name="amountCurrency" ><!--th:field="*{BalanceSumm}"-->
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="contractType">Вид договора</label>
-                            <input type="text" class="form-control" id="contractType" name="contractType"> <!--th:field="*{typeDog}"-->
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-4">
-                                <div class="form-group">
-                                    <label for="signContractDate">Дата заключения договора</label>
-                                    <input type="date" class="form-control" id="signContractDate" name="signContractDate" > <!--th:field="*{signDog}"-->
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6">
+                                    <label for="amountCurrencyId">Валюта</label>
+                                    <select class="form-control form-control-sm"  id="amountCurrencyId" name="amountCurrencyId">
+                                        <option th:each="okv : ${okvCodes}"
+                                                th:value="${okv.id}"
+                                                th:text="${okv.charcode}"><!--th:field="*{valCodeDog}"-->
+                                        </option>
+                                    </select>
                                 </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-4">
-                                <div class="form-group">
-                                    <label for="beginContractDate">Дата начала действия договора</label>
-                                    <input type="date" class="form-control" id="beginContractDate" name="beginContractDate" > <!--th:field="*{startDog}"-->
+                                <div class="col-xs-12 col-sm-6">
+                                    <label for="amount">Cумма</label>
+                                    <input class="form-control" id="amount" name="amount">
                                 </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-4">
-                                <div class="form-group">
-                                    <label for="endContractDate">Дата окончания договора</label>
-                                    <input type="date" class="form-control" id="endContractDate" name="endContractDate" > <!--th:field="*{endDog}"-->
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="percent">Расчетная ставка годовых, %</label>
-                            <input type="number"  value="1000" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100"
-                                   class="form-control currency" id="percent" /> <!--th:field="*{percent}"-->
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-6">
-                                <label for="amountCurrencyId">Валюта</label>
-                                <select class="form-control form-control-sm"  id="amountCurrencyId" name="amountCurrencyId">
-                                    <option th:each="okv : ${okvCodes}"
-                                            th:value="${okv.id}"
-                                            th:text="${okv.charcode}"><!--th:field="*{valCodeDog}"-->
-                                    </option>
-                                </select>
-                            </div>
-                            <div class="col-xs-12 col-sm-6">
-                                <label for="amount">Cумма</label>
-                                <input class="form-control" id="amount" name="amount">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
 </div>
 <!-- /.container -->
 
