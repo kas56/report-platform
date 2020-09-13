@@ -158,7 +158,7 @@
     <br/>
     <div class="row" id="actionBlock">
         <button type="button" id="addDetail" class="btn btn-primary">Добавить</button>
-        <button type="button" class="btn btn-success">Отправить</button>
+        <a th:href="@{/report/sendXml       (id=${report.id})}"> <button type="button" class="btn btn-success">Отправить</button></a>
         <a th:href="@{/report/downloadXls(id=${report.id})}"> <button type="button" class="btn btn-light">Выгрузить в Excel</button></a>
     </div>
     <br/>

@@ -5,10 +5,10 @@
     <title>Платформа отчетов</title>
 
     <div th:replace="fragments/header :: header-css"/>
-
+    <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
-<div th:replace="fragments/header :: header"></div>
+<div th:replace="fragments/header :: header"/>
 <div class="container">
     <div class="container theme-showcase">
         <h1>Календарь отчетов</h1>
@@ -20,22 +20,36 @@
                         <table style="white-space: nowrap; width: 100%">
                             <tbody>
                             <tr>
-                                <td style="text-align: left;"><span class="btn-group">                   <button
-                                        class="js-cal-prev btn btn-default">&lt;</button>                   <button
-                                        class="js-cal-next btn btn-default">&gt;</button>                 </span>
+                                <td style="text-align: left;">
+													<span class="btn-group">
+														<button
+                                                                class="js-cal-prev btn btn-default">&lt;</button>
+														<button
+                                                                class="js-cal-next btn btn-default">&gt;</button>
+													</span>
                                     <button class="js-cal-option btn btn-default active"
-                                            data-date="2020-09-13T12:55:33.700Z" data-mode="month">Hoy
+                                            data-date="2020-09-13T12:55:33.700Z" data-mode="month">Сегодня
                                     </button>
                                 </td>
-                                <td><span class="btn-group btn-group-lg">                                        <button
-                                        class="js-cal-option btn btn-link" data-mode="year">Septiembre</button>                                          <button
-                                        class="js-cal-years btn btn-link">2020</button>                                     </span>
+                                <td>
+													<span class="btn-group btn-group-lg">
+														<button
+                                                                class="js-cal-option btn btn-link" data-mode="year">Сентябрь</button>
+														<button
+                                                                class="js-cal-years btn btn-link">2020</button>
+													</span>
                                 </td>
-                                <td style="text-align: right"><span class="btn-group">                   <button
-                                        class="js-cal-option btn btn-default " data-mode="year">Año</button>                   <button
-                                        class="js-cal-option btn btn-default active" data-mode="month">Mes</button>                   <button
-                                        class="js-cal-option btn btn-default " data-mode="week">Semana</button>                   <button
-                                        class="js-cal-option btn btn-default " data-mode="day">Dia</button>                 </span>
+                                <td style="text-align: right">
+													<span class="btn-group">
+														<button
+                                                                class="js-cal-option btn btn-default " data-mode="year">Год</button>
+														<button
+                                                                class="js-cal-option btn btn-default active" data-mode="month">Месяц</button>
+														<button
+                                                                class="js-cal-option btn btn-default " data-mode="week">Неделя</button>
+														<button
+                                                                class="js-cal-option btn btn-default " data-mode="day">День</button>
+													</span>
                                 </td>
                             </tr>
                             </tbody>
@@ -45,13 +59,13 @@
                 </thead>
                 <thead>
                 <tr class="c-weeks">
-                    <th class="c-name"> Domingo</th>
-                    <th class="c-name"> Lunes</th>
-                    <th class="c-name"> Martes</th>
-                    <th class="c-name"> Miercoles</th>
-                    <th class="c-name"> Jueves</th>
-                    <th class="c-name"> Viernes</th>
-                    <th class="c-name"> Sabado</th>
+                    <th class="c-name"> Воскресенье</th>
+                    <th class="c-name"> Понедельник</th>
+                    <th class="c-name"> Вторник</th>
+                    <th class="c-name"> Среда</th>
+                    <th class="c-name"> Четверг</th>
+                    <th class="c-name"> Пятница</th>
+                    <th class="c-name"> Суббота</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -59,8 +73,9 @@
                     <td class="calendar-day outside _2020_8_30  c-sunday js-cal-option"
                         data-date="2020-08-29T21:00:00.000Z">
                         <div class="date">30</div>
-                        <div class="event begin end" title="Birthday Party" data-index="259">Birthday Party</div>
-                        <div class="event begin end" title="Meeting" data-index="260"><strong>4 pm</strong> Meeting
+                        <div class="event begin end" title="Birthday Party" data-index="259">Квартальный отчет</div>
+                        <div class="event begin end" title="Meeting" data-index="260">
+                            <strong>16:00</strong> ООО «Ромашка»
                         </div>
                     </td>
                     <td class="calendar-day outside _2020_8_31   js-cal-option" data-date="2020-08-30T21:00:00.000Z">
@@ -71,18 +86,21 @@
                     </td>
                     <td class="calendar-day current _2020_9_2   js-cal-option" data-date="2020-09-01T21:00:00.000Z">
                         <div class="date">2</div>
-                        <div class="event all-day begin end" title="Mr. Behnke" data-index="261">Mr. Behnke</div>
+                        <div class="event all-day begin end" title="Mr. Behnke" data-index="261">Еженедельный отчет</div>
+                        <div class="event begin end" title="Meeting" data-index="260">
+                            <strong>16:00</strong> ГК "РОСАТОМ"
+                        </div>
                     </td>
                     <td class="calendar-day current _2020_9_3   js-cal-option" data-date="2020-09-02T21:00:00.000Z">
                         <div class="date">3</div>
-                        <div class="event begin" title="Long Event" data-index="262">Long Event</div>
+                        <div class="event begin" title="Long Event" data-index="262"></div>
                     </td>
                     <td class="calendar-day current _2020_9_4   js-cal-option" data-date="2020-09-03T21:00:00.000Z">
                         <div class="date">4</div>
                         <div class="event" title="Long Event" data-index="262">&nbsp;</div>
-                        <div class="event begin" title="All Day Event" data-index="263">All Day Event</div>
-                        <div class="event begin end" title="Mr. Behnke" data-index="264"><strong>1:15 pm</strong> Mr.
-                            Behnke
+                        <div class="event begin" title="All Day Event" data-index="263">Месячный отчет</div>
+                        <div class="event begin end" title="Mr. Behnke" data-index="264">
+                            <strong>13:15</strong> АО "Ромашка"
                         </div>
                     </td>
                     <td class="calendar-day current _2020_9_5  c-saturday js-cal-option"
@@ -108,8 +126,8 @@
                         <div class="date">8</div>
                         <div class="clear event">&nbsp;</div>
                         <div class="event end" title="All Day Event" data-index="263">&nbsp;</div>
-                        <div class="event begin end" title="All Day Event" data-index="265"><strong>8:15 am</strong> All
-                            Day Event
+                        <div class="event begin end" title="All Day Event" data-index="265">
+                            <strong>20:15</strong> АО "Ромашка"
                         </div>
                     </td>
                     <td class="calendar-day current _2020_9_9   js-cal-option" data-date="2020-09-08T21:00:00.000Z">
@@ -124,7 +142,10 @@
                     <td class="calendar-day current _2020_9_12  c-saturday js-cal-option"
                         data-date="2020-09-11T21:00:00.000Z">
                         <div class="date">12</div>
-                        <div class="event begin" title="Meeting" data-index="266">Meeting</div>
+                        <div class="event begin" title="Meeting" data-index="266">Месячный отчет</div>
+                        <div class="event begin end" title="All Day Event" data-index="265">
+                            <strong>11:15</strong> РОСАТОМФЛОТ
+                        </div>
                     </td>
                 </tr>
                 <tr>
@@ -144,39 +165,54 @@
                     </td>
                     <td class="calendar-day current _2020_9_17   js-cal-option" data-date="2020-09-16T21:00:00.000Z">
                         <div class="date">17</div>
-                        <div class="event begin end" title="Ms. Tubbs" data-index="267"><strong>8 am</strong> Ms. Tubbs
+                        <div class="event begin" title="Meeting" data-index="266">Еженедельный отчет</div>
+                        <div class="event begin end" title="All Day Event" data-index="265">
+                            <strong>18:15</strong> РОСАТОМФЛОТ
                         </div>
                     </td>
                     <td class="calendar-day current _2020_9_18   js-cal-option" data-date="2020-09-17T21:00:00.000Z">
                         <div class="date">18</div>
-                        <div class="event all-day begin end" title="Date" data-index="268"><strong>8 am</strong> Date
+                        <div class="event all-day begin end" title="Date" data-index="268">
+                            <div class="event begin" title="Meeting" data-index="266">Месячный отчет</div>
+                            <div class="event begin end" title="All Day Event" data-index="265">
+                                <strong>11:15</strong> РОСАТОМФЛОТ
+                            </div>
                         </div>
-                        <div class="event begin end" title="Long Event" data-index="269"><strong>9:15 am</strong> Long
-                            Event
+                        <div class="event begin end" title="Long Event" data-index="269">
+                            <div class="event begin" title="Meeting" data-index="266">Месячный отчет</div>
+                            <div class="event begin end" title="All Day Event" data-index="265">
+                                <strong>18:15</strong> АО "ТВЭЛ"
+                            </div>
                         </div>
                     </td>
                     <td class="calendar-day current _2020_9_19  c-saturday js-cal-option"
                         data-date="2020-09-18T21:00:00.000Z">
                         <div class="date">19</div>
-                        <div class="event begin end" title="All Day Event" data-index="270">All Day Event</div>
-                        <div class="event begin end" title="Meeting" data-index="271">Meeting</div>
+                        <div class="event begin" title="Meeting" data-index="266">Еженедельный отчет</div>
+                        <div class="event begin end" title="All Day Event" data-index="265">
+                            <strong>11:15</strong> РОСАТОМФЛОТ
+                        </div>
                     </td>
                 </tr>
                 <tr>
                     <td class="calendar-day current _2020_9_20  c-sunday js-cal-option"
                         data-date="2020-09-19T21:00:00.000Z">
                         <div class="date">20</div>
-                        <div class="event all-day begin end" title="Repeating Event" data-index="272">Repeating Event
+                        <div class="event begin" title="Meeting" data-index="266">Месячный отчет</div>
+                        <div class="event begin end" title="All Day Event" data-index="265">
+                            <strong>18:45</strong> АО "Ромашка"
                         </div>
                     </td>
                     <td class="calendar-day current _2020_9_21   js-cal-option" data-date="2020-09-20T21:00:00.000Z">
                         <div class="date">21</div>
-                        <div class="event begin" title="Date" data-index="273">Date</div>
+                        <div class="event begin" title="Date" data-index="273"></div>
                     </td>
                     <td class="calendar-day current _2020_9_22   js-cal-option" data-date="2020-09-21T21:00:00.000Z">
                         <div class="date">22</div>
-                        <div class="event" title="Date" data-index="273">&nbsp;</div>
-                        <div class="event begin end" title="Date" data-index="274">Date</div>
+                        <div class="event begin" title="Meeting" data-index="266">Еженедельный отчет</div>
+                        <div class="event begin end" title="All Day Event" data-index="265">
+                            <strong>11:15</strong> ГК "РОСАТОМ"
+                        </div>
                     </td>
                     <td class="calendar-day current _2020_9_23   js-cal-option" data-date="2020-09-22T21:00:00.000Z">
                         <div class="date">23</div>
@@ -201,7 +237,10 @@
                     </td>
                     <td class="calendar-day current _2020_9_28   js-cal-option" data-date="2020-09-27T21:00:00.000Z">
                         <div class="date">28</div>
-                        <div class="event begin" title="Date" data-index="275">Date</div>
+                        <div class="event begin" title="Meeting" data-index="266">Месячный отчет</div>
+                        <div class="event begin end" title="All Day Event" data-index="265">
+                            <strong>18:45</strong> ГК "РОСАТОМ"
+                        </div>
                     </td>
                     <td class="calendar-day current _2020_9_29   js-cal-option" data-date="2020-09-28T21:00:00.000Z">
                         <div class="date">29</div>
@@ -209,7 +248,10 @@
                     </td>
                     <td class="calendar-day current _2020_9_30   js-cal-option" data-date="2020-09-29T21:00:00.000Z">
                         <div class="date">30</div>
-                        <div class="event begin" title="Birthday Party" data-index="276">Birthday Party</div>
+                        <div class="event begin" title="Meeting" data-index="266">Еженедельный отчет</div>
+                        <div class="event begin end" title="All Day Event" data-index="265">
+                            <strong>18:15</strong> АО "ТВЭЛ"
+                        </div>
                     </td>
                     <td class="calendar-day outside _2020_10_1   js-cal-option" data-date="2020-09-30T21:00:00.000Z">
                         <div class="date">1</div>
@@ -217,7 +259,10 @@
                     </td>
                     <td class="calendar-day outside _2020_10_2   js-cal-option" data-date="2020-10-01T21:00:00.000Z">
                         <div class="date">2</div>
-                        <div class="event begin end" title="All Day Event" data-index="277">All Day Event</div>
+                        <div class="event begin" title="Meeting" data-index="266">Месячный отчет</div>
+                        <div class="event begin end" title="All Day Event" data-index="265">
+                            <strong>18:45</strong> ГК "РОСАТОМ"
+                        </div>
                     </td>
                     <td class="calendar-day outside _2020_10_3  c-saturday js-cal-option"
                         data-date="2020-10-02T21:00:00.000Z">
@@ -234,9 +279,17 @@
                     </td>
                     <td class="calendar-day outside _2020_10_6   js-cal-option" data-date="2020-10-05T21:00:00.000Z">
                         <div class="date">6</div>
-                        <div class="event begin" title="Date" data-index="278"><strong>8:15 am</strong> Date</div>
-                        <div class="event begin end" title="Repeating Event" data-index="279"><strong>4 pm</strong>
-                            Repeating Event
+                        <div class="event begin" title="Date" data-index="278">
+                            <div class="event begin" title="Meeting" data-index="266">Еженедельный отчет</div>
+                            <div class="event begin end" title="All Day Event" data-index="265">
+                                <strong>18:23</strong> АО "ТВЭЛ"
+                            </div>
+                        </div>
+                        <div class="event begin end" title="Repeating Event" data-index="279">
+                            <div class="event begin" title="Meeting" data-index="266">Квартальный отчет</div>
+                            <div class="event begin end" title="All Day Event" data-index="265">
+                                <strong>18:15</strong> ГК "РОСАТОМ"
+                            </div>
                         </div>
                     </td>
                     <td class="calendar-day outside _2020_10_7   js-cal-option" data-date="2020-10-06T21:00:00.000Z">
@@ -263,7 +316,7 @@
 
 <!-- /.container -->
 
-<div th:replace="fragments/footer :: footer"></div>
+<div th:replace="fragments/footer :: footer"/>
 
 </body>
 </html>
