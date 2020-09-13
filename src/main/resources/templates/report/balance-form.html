@@ -13,13 +13,16 @@
 <div class="container">
     <h2>Форма отчета</h2>
 
-    <form id="balanceFormReport" action="#" th:action="@{/report/reportDetails}" th:object="${reportDetails}" method="post" style="display: none">
+    <form id="balanceFormReport" action="#" th:action="@{/report/reportDetails}" th:object="${reportDetail}" method="post" style="display: none">
+<!--
         <p><input type="submit" class="btn btn-success" value="Сохранить" /> <input type="reset" class="btn btn-danger" value="Вернуться" /></p>
+-->
 
         <div class="card-body">
             <!--Срытые инпуты-->
-            <input id="email" name="email" type="hidden" th:field="*{email}"> <!---->
-            <input id="reportDate" name="reportDate" type="hidden" th:field="*{reportDate}"> <!---->
+            <input id="userId" name="userId" type="hidden" th:field="*{userId}"> <!---->
+            <input id="dateReport" name="dateReport" type="hidden" th:field="*{dateReport}"> <!---->
+            <input id="reportId" name="reportId" type="hidden" th:field="*{reportId}"> <!---->
 
             <div class="table-responsive">
                 <div class="container">
@@ -140,13 +143,17 @@
                     <th>№п/п</th>
                     <th>Наименование организации </th>
                     <th>Банк</th>
+                    <th>БИК</th>
+                    <th>Остаток на счете</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each ="detail : ${report.reportDetails}">
-                    <td th:utext="${detail.id}">...</td>
-                    <td th:utext="${detail.shortname}">...</td>
-                    <td th:utext="${detail.bic}">...</td>
+                    <td th:utext="${detail.npp}">...</td>
+                    <td th:utext="${detail.orgName}">...</td>
+                    <td th:utext="${detail.bankName}">...</td>
+                    <td th:utext="${detail.bankBik}">...</td>
+                    <td th:utext="${detail.balanceSumm}">...</td>
                 </tr>
                 </tr>
                 </tbody>

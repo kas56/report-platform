@@ -8,18 +8,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 import ru.plot.dto.ReportDto;
+import ru.plot.entity.Okv;
+import ru.plot.entity.Organizations;
 import ru.plot.entity.*;
+import ru.plot.repo.OkvRepository;
+import ru.plot.repo.OrganizationsRepository;
 import ru.plot.repo.*;
 import ru.plot.service.PermissionService;
 import ru.plot.repo.OkvRepository;
 import ru.plot.repo.OrganizationsRepository;
+import ru.plot.service.ReportService;
 
 import javax.annotation.security.RolesAllowed;
 import java.io.*;
@@ -31,6 +35,9 @@ import java.util.List;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.math.BigInteger;
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -52,6 +59,8 @@ public class ReportController {
 
     @Autowired
     private ReportsRepository reportsRepository;
+    @Autowired
+    private ReportService reportService;
 
     private PermissionService permissionService;
 
@@ -69,6 +78,9 @@ public class ReportController {
     }
     @GetMapping("/balance")
     public String balances(Model model) {
+        UserEntity principal = (UserEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List<Reports> reports = reportsRepository.findByUser(principal);
+        model.addAttribute("reports", reports);
         model.addAttribute("perms", permissionService.getUserPermissions());
         return "/report/balances";
     }
@@ -82,18 +94,25 @@ public class ReportController {
 
     @GetMapping("/balance/form")
     public String balanceForm(@RequestParam(required = false, value = "reportId") String reportId, Model model) {
+        UserEntity principal = (UserEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
         if (reportId==null || reportId.isEmpty()) {
             Reports report = new Reports();
             report.setDateReport(LocalDate.now());
-            UserEntity principal = (UserEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             report.setIdUser(principal.getIdUser());
             Reports save = reportsRepository.save(report);
             return "redirect:/report/balance/form?reportId="+save.getId();
         } else {
 
             Optional<Reports> save = reportsRepository.findById(new BigInteger(reportId));
-            Reports reports = save.get();
-            model.addAttribute("report", reports);
+            Reports report = save.get();
+            model.addAttribute("report", report);
+            ReportDto reportDetail = new ReportDto();
+            reportDetail.setUserId(principal.getIdUser());
+            reportDetail.setDateReport(report.getDateReport());
+            reportDetail.setReportId(report.getId());
+            model.addAttribute("reportDetail", reportDetail);
+
             //Справочник организаций
         List<Organizations> organizations = organizationsRepository.findAll();
         model.addAttribute("organizations", organizations);
@@ -101,10 +120,10 @@ public class ReportController {
         //Справочник валют
         Iterable<Okv> okvCodes = okvRepository.findAll();
         model.addAttribute("okvCodes", okvCodes);
-        model.addAttribute("reportDetails", new ArrayList<>());
+        model.addAttribute("userId", principal.getIdUser());
+        model.addAttribute("userId", principal.getIdUser());
         model.addAttribute("perms", permissionService.getUserPermissions());
 
-        model.addAttribute("reportDetails", new ReportDto());
         model.addAttribute("perms", permissionService.getUserPermissions());
 
         return "/report/balance-form";
@@ -113,9 +132,9 @@ public class ReportController {
 
     @RequestMapping(value="/reportDetails", method=RequestMethod.POST)
     public String greetingSubmit(@ModelAttribute ReportDto rep, Model model) {
-        model.addAttribute("perms", permissionService.getUserPermissions());
+        reportService.addDetails(rep);
         model.addAttribute("reportDetails", rep);
-        return "report/balance";
+        return "redirect:/report/balance/form?reportId="+rep.getReportId();
     }
 
     @GetMapping("/downloadXls")
@@ -126,8 +145,9 @@ public class ReportController {
 
         Sheet sheet = workBook.getSheetAt(0);
 
-        Optional<Reports> reports = reportRepository.findById(BigInteger.valueOf(reportId));
-        List<ReportDetails> reportDetails = reportDetailsRepository.findByIdReport(BigInteger.valueOf(reportId));
+        Optional<Reports> reportsOpt = reportRepository.findById(BigInteger.valueOf(reportId));
+        Reports reports = reportsOpt.get();
+        List<ReportDetails> reportDetails = reports.getReportDetails();
         int rowInt = 10;
         for (ReportDetails reportDetail : reportDetails) {
             rowInt++;

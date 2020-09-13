@@ -1,5 +1,6 @@
 package ru.plot.service;
 
+import ru.plot.dto.ReportDto;
 import ru.plot.entity.VSaveReportsValbalXml;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ReportSevice {
+public class ReportService {
 
     @Autowired
     ReportsRepository reportRepository;
@@ -119,4 +120,31 @@ public class ReportSevice {
     }
 
 
+    /**
+     * метод добавления детализации
+     * @param rep
+     */
+    public void addDetails(ReportDto rep) {
+        Optional<Reports> byId = reportRepository.findById(rep.getReportId());
+        if (!byId.isPresent()) throw new IllegalStateException();
+        Reports report = byId.get();
+        ReportDetails details = new ReportDetails();
+        details.setNpp(report.getReportDetails().size()+1);
+        details.setBalanceSumm(rep.getBalanceSumm());
+        details.setBankBik(rep.getBankBik());
+        details.setBankName(rep.getBankName());
+        details.setComment(rep.getComment());
+        details.setEndDog(rep.getEndDog());
+        details.setOperSum(rep.getOperSum());
+       // details.set(rep.getOrgId());
+        details.setPercent(rep.getPercent());
+        details.setSignDog(rep.getSignDog());
+        details.setStartDog(rep.getStartDog());
+        details.setTypeDog(rep.getTypeDog());
+        details.setValCode(rep.getValCode());
+        details.setValCodeDog(rep.getValCodeDog());
+        details.setReport(report);
+        report.getReportDetails().add(details);
+        reportRepository.save(report);
+    }
 }

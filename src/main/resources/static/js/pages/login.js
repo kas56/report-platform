@@ -1,5 +1,4 @@
 
-
 document.addEventListener("DOMContentLoaded", function () {
 
     let authForm = document.querySelector(".auth_form");
@@ -49,3 +48,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 });
+
+const SignLoginFormPageScript = function(){
+    include_async_code()
+
+    async_resolve();
+}

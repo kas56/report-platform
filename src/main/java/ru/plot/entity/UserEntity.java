@@ -31,6 +31,9 @@ public class UserEntity implements UserDetails {
 
     @Column(name = "id_org")
     private Long orgId;
+    @ManyToOne
+    @JoinColumn(name = "id_org", insertable = false, updatable = false)
+    private Organizations organization;
 
     @Column(name = "s_firstname")
     private String firstName;

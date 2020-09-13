@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Date;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Getter
 @Setter
@@ -22,7 +23,17 @@ public class Reports {
   @Column(name = "dt_date_report") private LocalDate dateReport;
   // ссылка на пользователя
   @Column(name = "id_user") private BigInteger idUser;
+  // ссылка на пользователя
+  @ManyToOne
+  @JoinColumn(name = "id_user", updatable = false, insertable = false)
+  private UserEntity user;
   // комментарий
   @Column(name = "s_comment") private String comment;
+
+  // статус
+  //@Column(name = "s_status") private Status status;
+
+  @OneToMany (mappedBy = "report", cascade = CascadeType.ALL)
+  private List<ReportDetails> reportDetails;
 
 }

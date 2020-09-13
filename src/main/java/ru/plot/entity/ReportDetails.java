@@ -18,8 +18,6 @@ public class ReportDetails {
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id_report_details") private BigInteger id;
-  // ссылка на отчёт
-  @Column(name = "id_report") private BigInteger idReport;
   // ID из внешней системы (откуда обновляется список организаций)
   @Column(name = "external_id") private String externalId;
   // ИНН оганизации
@@ -55,6 +53,9 @@ public class ReportDetails {
   // сумма по договору
   @Column(name = "f_oper_sum") private BigDecimal operSum;
   // номер строки по порядку (для одинакового показа архивных отчётов требуется сортировка по данному полю)
-  @Column(name = "i_npp") private BigInteger npp;
+  @Column(name = "i_npp") private Integer npp;
 
+  @ManyToOne
+  @JoinColumn(name = "id_report")
+  private Reports report;
 }

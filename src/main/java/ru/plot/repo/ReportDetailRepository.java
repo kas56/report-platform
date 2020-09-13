@@ -9,5 +9,4 @@ import java.util.List;
 
 @Repository
 public interface ReportDetailRepository extends CrudRepository<ReportDetails, BigInteger> {
-    List<ReportDetails> findByIdReport(BigInteger idReport);
 }
