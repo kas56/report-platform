@@ -12,8 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
-import ru.plot.entity.ReportDetails;
-import ru.plot.repo.DataDayReportRepository;
+import ru.plot.dto.ReportDto;
 import ru.plot.service.PermissionService;
 import ru.plot.entity.Okv;
 import ru.plot.entity.Organizations;
@@ -76,15 +75,17 @@ public class ReportController {
         model.addAttribute("okvCodes", okvCodes);
         model.addAttribute("perms", permissionService.getUserPermissions());
 
-        model.addAttribute("reportDetails", new ReportDetails());
+        model.addAttribute("reportDetails", new ReportDto());
+        model.addAttribute("perms", permissionService.getUserPermissions());
 
         return "/report/balance-form";
     }
 
     @RequestMapping(value="/reportDetails", method=RequestMethod.POST)
-    public String greetingSubmit(@ModelAttribute ReportDetails rep, Model model) {
+    public String greetingSubmit(@ModelAttribute ReportDto rep, Model model) {
+        model.addAttribute("perms", permissionService.getUserPermissions());
         model.addAttribute("reportDetails", rep);
-        return "result";
+        return "report/balance";
     }
 
     @GetMapping("/downloadXls")
