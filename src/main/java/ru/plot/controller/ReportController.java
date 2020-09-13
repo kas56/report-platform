@@ -1,13 +1,12 @@
 package ru.plot.controller;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,9 +18,9 @@ import ru.plot.repo.*;
 import ru.plot.service.ReportService;
 
 import javax.annotation.security.RolesAllowed;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import javax.xml.bind.JAXBException;
+import javax.xml.datatype.DatatypeConfigurationException;
+import java.io.*;
 import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -168,7 +167,28 @@ public class ReportController {
         return ResponseEntity
                 .ok()
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
-                .header(HttpHeaders.CONTENT_DISPOSITION, "inline;filename=\"123.xlsx\"")
+                .header(HttpHeaders.CONTENT_DISPOSITION, "inline;filename=\"report_"+reportId+".xlsx\"")
                 .body(workBook::write);
+    }
+
+    @GetMapping( value = "/sendXml", produces ={"application/json"})
+    public HttpEntity<byte[]> sendXml(@RequestParam String id) throws IOException, JAXBException, DatatypeConfigurationException {
+        String xml = reportService.getXmlString(id);
+
+        File file = new File("src/main/resources/xls/finReport_"+id+".xml");
+        FileWriter fileWriter = new FileWriter(file);
+        fileWriter.write(xml);
+        fileWriter.close();
+
+        InputStream inputStream = new FileInputStream(file);
+
+        byte[] out = IOUtils.toByteArray(inputStream);
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.setContentType(new MediaType("finReport"+id+".xml", "xml"));
+        responseHeaders.setContentLength(xml.getBytes().length);
+
+
+        return new HttpEntity<>(xml.getBytes(), responseHeaders);
+
     }
 }
