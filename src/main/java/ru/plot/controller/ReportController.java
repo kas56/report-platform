@@ -15,17 +15,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 import ru.plot.dto.ReportDto;
-import ru.plot.entity.Reports;
-import ru.plot.entity.UserEntity;
-import ru.plot.repo.ReportsRepository;
+import ru.plot.entity.*;
+import ru.plot.repo.*;
 import ru.plot.service.PermissionService;
-import ru.plot.entity.Okv;
-import ru.plot.entity.Organizations;
 import ru.plot.repo.OkvRepository;
 import ru.plot.repo.OrganizationsRepository;
 
 import javax.annotation.security.RolesAllowed;
 import java.io.*;
+import java.math.BigInteger;
 import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -45,6 +43,12 @@ public class ReportController {
 
     @Autowired
     private OkvRepository okvRepository;
+
+    @Autowired
+    private ReportsRepository reportRepository;
+
+    @Autowired
+    private ReportDetailRepository reportDetailsRepository;
 
     @Autowired
     private ReportsRepository reportsRepository;
@@ -115,13 +119,39 @@ public class ReportController {
     }
 
     @GetMapping("/downloadXls")
-    public ResponseEntity<StreamingResponseBody> getFile() throws IOException {
+    public ResponseEntity<StreamingResponseBody> getFile(@RequestParam String id) throws IOException {
+        Long reportId = Long.valueOf(id);
         FileInputStream file = new FileInputStream(new File("src/main/resources/xls/finReport.xlsx"));
         Workbook workBook = new XSSFWorkbook(file);
 
-        Sheet sheet = workBook.getSheet("Данные");
-        Row row = sheet.createRow(11);
-        row.createCell(0).setCellValue("Hello World");
+        Sheet sheet = workBook.getSheetAt(0);
+
+        Optional<Reports> reports = reportRepository.findById(BigInteger.valueOf(reportId));
+        List<ReportDetails> reportDetails = reportDetailsRepository.findByIdReport(BigInteger.valueOf(reportId));
+        int rowInt = 10;
+        for (ReportDetails reportDetail : reportDetails) {
+            rowInt++;
+            Row row = sheet.createRow(rowInt);
+            row.createCell(0).setCellValue(reportDetail.getNpp().toString());
+            row.createCell(1).setCellValue(reportDetail.getExternalId());
+            row.createCell(2).setCellValue(reportDetail.getOrgInn());
+            row.createCell(3).setCellValue(reportDetail.getOrgKpp());
+            row.createCell(4).setCellValue(reportDetail.getOrgName());
+            row.createCell(5).setCellValue(reportDetail.getMain());
+            row.createCell(6).setCellValue(reportDetail.getBankBik());
+            row.createCell(7).setCellValue(reportDetail.getBankName());
+            row.createCell(8).setCellValue(reportDetail.getComment());
+            row.createCell(9).setCellValue(reportDetail.getValCode());
+            row.createCell(10).setCellValue(reportDetail.getBalanceSumm().toString());
+            row.createCell(11).setCellValue(reportDetail.getSignDog().toString());
+            row.createCell(12).setCellValue(reportDetail.getStartDog().toString());
+            row.createCell(13).setCellValue(reportDetail.getEndDog().toString());
+            row.createCell(14).setCellValue(reportDetail.getPercent().toString());
+            row.createCell(15).setCellValue(reportDetail.getValCodeDog());
+            row.createCell(16).setCellValue(reportDetail.getOperSum().toString());
+
+        }
+
 
         return ResponseEntity
                 .ok()
