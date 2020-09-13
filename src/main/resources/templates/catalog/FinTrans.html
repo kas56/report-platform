@@ -11,7 +11,7 @@
     <div class="container">
         <h2>Справочник финансовых сделок</h2>
         <br>
-        <form sec:authorize="hasRole('ADMIN')" action="#" th:action="@{/catalog/CurrencyRates}" method="post">
+        <form sec:authorize="hasRole('ADMIN')" action="#" th:action="@{/catalog/finTrans}" method="post">
             <div class="row">
                 <div class="custom-file">
                     <input type="file" class="custom-file-input" id="validatedCustomFile" required>
@@ -32,27 +32,32 @@
                 <thead class="thead-dark">
                 <tr>
                     <th>ID</th>
-                    <th>Наименование организации </th>
-                    <th>БИК </th>
+                    <th>Номер договора</th>
+                    <th>Дата заключения</th>
+                    <th>Дата начала</th>
+                    <th>Дата окончания</th>
+                    <th>Дата расторжения</th>
+                    <th>Сумма операции по договору</th>
+                    <th>Процентная ставка</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each ="bic : ${finTrans}">
-                    <td th:utext="${bic.id}">...</td>
-                    <td th:utext="${bic.shortname}">...</td>
-                    <td th:utext="${bic.bic}">...</td>
-                </tr>
+                <tr th:each ="fin : ${finTrans}">
+                    <td th:utext="${fin.id}">...</td>
+                    <td th:utext="${fin.numDog}">...</td>
+                    <td th:utext="${fin.signDog}">...</td>
+                    <td th:utext="${fin.startDog}">...</td>
+                    <td th:utext="${fin.endDog}">...</td>
+                    <td th:utext="${fin.termDog}">...</td>
+                    <td th:utext="${fin.operSumm}">...</td>
+                    <td th:utext="${fin.percent}">...</td>
                 </tr>
                 </tbody>
             </table>
         </div>
         </div>
-
     </div>
-
-
 <div th:replace="fragments/footer :: footer"/>
-
 </body>
 
 </html>

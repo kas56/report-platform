@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import ru.plot.entity.BankDog;
 import ru.plot.entity.CurrencyRate;
 import ru.plot.entity.Organizations;
+import ru.plot.repo.BankDogRepository;
 import ru.plot.repo.CurrencyRateRepository;
 import ru.plot.repo.OrganizationsRepository;
 import ru.plot.service.BankService;
@@ -30,6 +32,8 @@ public class CatalogController {
     private BankService bankService;
     @Autowired
     private OrganizationsRepository organizationsRepository;
+    @Autowired
+    private BankDogRepository bankDogRepository;
 
     private PermissionService permissionService;
 
@@ -76,7 +80,8 @@ public class CatalogController {
     }
     @GetMapping("/FinTrans")
     public String FinTrans(Model model) {
-        model.addAttribute("finTrans", new ArrayList<>());
+        List<BankDog> finTrans = bankDogRepository.findAll();
+        model.addAttribute("finTrans", finTrans);
         return "/catalog/FinTrans.html";
     }
     @GetMapping("/Organizations")
