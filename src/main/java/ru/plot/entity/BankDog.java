@@ -2,6 +2,8 @@ package ru.plot.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.math.BigInteger;
 import java.math.BigDecimal;
@@ -23,15 +25,19 @@ public class BankDog {
   // ссылка на тип договора
   @Column(name = "id_type_dog") private BigInteger idTypeDog;
   // дата заключения
+  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
   @Column(name = "d_sign_dog") private LocalDate signDog;
   // дата начала
+  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
   @Column(name = "d_start_dog") private LocalDate startDog;
   // дата окончания
+  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
   @Column(name = "d_end_dog") private LocalDate endDog;
   // дата расторжения
+  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
   @Column(name = "d_term_dog") private LocalDate termDog;
   // сумма операции по договору
-  @Column(name = "f_oper_summ") private String operSumm;
+  @Column(name = "f_oper_summ") private BigDecimal operSumm;
   // ссылка на счёт
   @Column(name = "id_account") private BigInteger idAccount;
   // ссылка на валюту договора (по идее должна совпадать с валютой счёта, но при необходимости можно и разные указать)

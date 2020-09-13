@@ -23,6 +23,81 @@
                     <button type="submit" class="btn btn-success">Загрузить</button>
                 </a>
             </div>
+        <form id="finTransForm" action="#" th:action="@{/catalog/finTrans}" th:object="${bankDog}" method="post" style="display: none"><!--style="display: none"-->
+            <div class="card-body">
+                <!--Срытые инпуты-->
+                <input id="userId" name="userId" type="hidden" > <!--th:field="*{userId}"-->
+
+                <div class="table-responsive">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="form-group">
+                                            <label for="numDog">Номер договора</label>
+                                            <input type="text" class="form-control" id="numDog" th:field="*{numDog}"><!---->
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="form-group">
+                                            <label for="signDog">Дата заключения</label>
+                                            <input type="date" class="form-control" id="signDog" th:field="*{signDog}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-4">
+                                        <div class="form-group">
+                                            <label for="startDog">Дата начала</label>
+                                            <input type="date" class="form-control" id="startDog" name="startDog" th:field="*{startDog}"> <!--th:field="*{signDog}"-->
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4">
+                                        <div class="form-group">
+                                            <label for="endDog">Дата окончания</label>
+                                            <input type="date" class="form-control" id="endDog" th:field="*{endDog}"> <!--th:field="*{startDog}"-->
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4">
+                                        <div class="form-group">
+                                            <label for="termDog">Дата расторжения</label>
+                                            <input type="date" class="form-control" id="termDog" th:field="*{termDog}"> <!--th:field="*{endDog}"-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="form-group">
+                                            <label for="operSumm">Сумма операции по договору</label>
+                                            <input type="number"  value="1000" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100"
+                                                   class="form-control currency" id="operSumm" th:field="*{operSumm}"/> <!--th:field="*{percent}"-->
+
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="form-group">
+                                            <label for="percent">Процентная ставка</label>
+                                            <input type="number"  value="1000" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100"
+                                                   class="form-control currency" id="percent" th:field="*{percent}"/> <!--th:field="*{percent}"-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" id="formActionBlockFin">
+                            <button type="submit" class="btn btn-success">Сохранить</button>
+                            <button type="button" id="formActionCancel" class="btn btn-light">Отмена</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <br>
+        <br>
+            <div class="row" id="actionBlockFin">
+                <button type="button" id="addFinTrans" class="btn btn-primary">Добавить сделку</button>
+            </div>
         </form>
         <br>
         <br>
@@ -58,6 +133,13 @@
         </div>
     </div>
 <div th:replace="fragments/footer :: footer"/>
+
+<script type="text/javascript" th:src="@{/js/fin-trans-page.js}"></script>
+
+<script type="text/javascript">
+    $(document).ready(finTransPageScript)();
+</script>
+
 </body>
 
 </html>

@@ -69,6 +69,7 @@ public class CatalogController {
     public String FinTrans(Model model) {
         List<BankDog> finTrans = bankDogRepository.findAll();
         model.addAttribute("finTrans", finTrans);
+        model.addAttribute("bankDog", new BankDog());
         return "/catalog/FinTrans.html";
     }
     @GetMapping("/Organizations")
@@ -86,5 +87,14 @@ public class CatalogController {
         model.addAttribute("orgs", orgs);
         model.addAttribute("org", org);
         return "/catalog/Organizations.html";
+    }
+
+    @PostMapping("/finTrans")
+    public String FinTrans(@ModelAttribute BankDog dog, Model model) {
+        bankDogRepository.save(dog);
+        List<BankDog> finTrans =  bankDogRepository.findAll();
+        model.addAttribute("finTrans", finTrans);
+        model.addAttribute("bankDog", dog);
+        return "/catalog/FinTrans.html";
     }
 }
