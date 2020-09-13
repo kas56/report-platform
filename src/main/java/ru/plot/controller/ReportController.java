@@ -10,11 +10,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
+import ru.plot.entity.ReportDetails;
 import ru.plot.repo.DataDayReportRepository;
 import ru.plot.service.PermissionService;
 import ru.plot.entity.Okv;
@@ -78,7 +76,15 @@ public class ReportController {
         model.addAttribute("okvCodes", okvCodes);
         model.addAttribute("perms", permissionService.getUserPermissions());
 
+        model.addAttribute("reportDetails", new ReportDetails());
+
         return "/report/balance-form";
+    }
+
+    @RequestMapping(value="/reportDetails", method=RequestMethod.POST)
+    public String greetingSubmit(@ModelAttribute ReportDetails rep, Model model) {
+        model.addAttribute("reportDetails", rep);
+        return "result";
     }
 
     @GetMapping("/downloadXls")
