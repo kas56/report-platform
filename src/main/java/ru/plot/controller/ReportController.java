@@ -15,10 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 import ru.plot.dto.ReportDto;
 import ru.plot.entity.*;
-import ru.plot.repo.OkvRepository;
-import ru.plot.repo.OrganizationsRepository;
-import ru.plot.repo.ReportDetailRepository;
-import ru.plot.repo.ReportsRepository;
+import ru.plot.repo.*;
 import ru.plot.service.ReportService;
 
 import javax.annotation.security.RolesAllowed;
@@ -157,7 +154,7 @@ public class ReportController {
             row.createCell(8).setCellValue(reportDetail.getComment());
             row.createCell(9).setCellValue(reportDetail.getValCode());
             row.createCell(10).setCellValue(reportDetail.getBalanceSumm().toString());
-            row.createCell(11).setCellValue(reportDetail.getTypeDog());
+            row.createCell(11).setCellValue(reportDetail.getTypeDogName());
             row.createCell(12).setCellValue(reportDetail.getSignDog().toString());
             row.createCell(13).setCellValue(reportDetail.getStartDog().toString());
             row.createCell(14).setCellValue(reportDetail.getEndDog().toString());
