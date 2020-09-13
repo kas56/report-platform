@@ -22,13 +22,13 @@
                     <form th:action="@{/login}" method="post">
                         <div th:if="${param.error}">
                             <div class="alert alert-danger">
-                                Invalid username or password.
+                                Неверно введен пользователь или пароль.
                             </div>
                         </div>
                         <fieldset class="clearfix auth_form">
 
-                            <p ><span class="fa fa-user"></span><input class="user_field" type="text" id="username" name="username"  Placeholder="Username" required></p> <!-- JS because of IE support; better: placeholder="Username" -->
-                            <p><span class="fa fa-lock"></span><input class="password_field" type="password" id="password" name="password"  Placeholder="Password" required></p> <!-- JS because of IE support; better: placeholder="Password" -->
+                            <p ><span class="fa fa-user"></span><input class="user_field" type="text" id="username" name="username"  Placeholder="Пользователь" required></p> <!-- JS because of IE support; better: placeholder="Username" -->
+                            <p><span class="fa fa-lock"></span><input class="password_field" type="password" id="password" name="password"  Placeholder="Пароль" required></p> <!-- JS because of IE support; better: placeholder="Password" -->
 
                                 <div class="error_message">
 
