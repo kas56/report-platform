@@ -11,7 +11,7 @@
     <div class="container">
         <h2>Справочник организаций</h2>
         <br>
-        <form sec:authorize="hasRole('ADMIN')" action="#" th:action="@{/catalog/CurrencyRates}" method="post">
+        <form sec:authorize="hasRole('ADMIN')" action="#" th:action="@{/catalog/Organizations}" method="post">
             <div class="row">
                 <div class="custom-file">
                     <input type="file" class="custom-file-input" id="validatedCustomFile" required>
@@ -23,6 +23,95 @@
                     <button type="submit" class="btn btn-success">Загрузить</button>
                 </a>
             </div>
+
+            <form id="organizationForm" action="#" th:action="@{/catalog/organizations}" th:object="${org}" method="post" style="display: none"><!---->
+                <div class="card-body">
+                    <!--Срытые инпуты-->
+                    <input id="userId" name="userId" type="hidden" > <!--th:field="*{userId}"-->
+                    <input id="dateReport" name="dateReport" type="hidden" > <!--th:field="*{dateReport}-->
+                    <input id="reportId" name="reportId" type="hidden" > <!--th:field="*{reportId}"-->
+
+                    <div class="table-responsive">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm">
+                                    <div class="form-group">
+                                        <label for="shortName"> Наименование организации</label>
+                                        <input type="text" class="form-control" id="shortName" name="shortName" th:field="*{shortName}"><!---->
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-4">
+                                            <div class="form-group">
+                                                <label for="orgInn">ИНН</label>
+                                                <input type="text" class="form-control" id="orgInn" th:field="*{orgInn}"><!---->
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-4">
+                                            <div class="form-group">
+                                                <label for="orgOgrn">ОГРН</label>
+                                                <input type="text" class="form-control" id="orgOgrn" name="orgOgrn" th:field="*{orgOgrn}"><!---->
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-4">
+                                            <div class="form-group">
+                                                <label for="orgKpp">КПП</label>
+                                                <input type="text" class="form-control" id="orgKpp" name="orgKpp" th:field="*{orgKpp}"><!---->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="jurAddress">Адрес</label>
+                                        <input type="text" class="form-control" id="jurAddress" name="jurAddress" th:field="*{jurAddress}"><!---->
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-6">
+                                            <div class="form-group">
+                                                <label for="phone">Телефон</label>
+                                                <input type="text" class="form-control" id="phone" th:field="*{phone}">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6">
+                                            <div class="form-group">
+                                                <label for="registration">Дата постановки на учет</label>
+                                                <input type="date" class="form-control" id="registration" th:field="*{registration}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-4">
+                                            <div class="form-group">
+                                                <label for="okato">ОКАТО</label>
+                                                <input type="text" class="form-control" id="okato" th:field="*{okato}">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-4">
+                                            <div class="form-group">
+                                                <label for="oktmo">ОКТМО</label>
+                                                <input type="text" class="form-control" id="oktmo" th:field="*{oktmo}">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-4">
+                                            <div class="form-group">
+                                                <label for="okpo">ОКПО</label>
+                                                <input type="text" class="form-control"  id="okpo" name="okpo" th:field="*{okpo}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" id="formActionBlockOrg">
+                                <button type="submit" class="btn btn-success">Сохранить</button>
+                                <button type="button" id="formActionCancel" class="btn btn-light">Отмена</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        <br>
+        <br>
+        <div class="row" id="actionBlockOrg">
+            <button type="button" id="addOrg" class="btn btn-primary">Добавить организацию</button>
+        </div>
         </form>
         <br>
         <br>
@@ -67,6 +156,12 @@
 
 
 <div th:replace="fragments/footer :: footer"/>
+
+<script type="text/javascript" th:src="@{/js/orgs-page.js}"></script>
+
+<script type="text/javascript">
+    $(document).ready(orgsPageScript)();
+</script>
 
 </body>
 

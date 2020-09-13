@@ -4,10 +4,7 @@ package ru.plot.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import ru.plot.entity.BankDog;
 import ru.plot.entity.CurrencyRate;
 import ru.plot.entity.Organizations;
@@ -78,6 +75,16 @@ public class CatalogController {
     public String Organizations(Model model) {
         List<Organizations> orgs =  organizationsRepository.findAll();
         model.addAttribute("orgs", orgs);
+        model.addAttribute("org", new Organizations());
+        return "/catalog/Organizations.html";
+    }
+
+    @PostMapping("/organizations")
+    public String Organizations(@ModelAttribute Organizations org, Model model) {
+        organizationsRepository.save(org);
+        List<Organizations> orgs =  organizationsRepository.findAll();
+        model.addAttribute("orgs", orgs);
+        model.addAttribute("org", org);
         return "/catalog/Organizations.html";
     }
 }

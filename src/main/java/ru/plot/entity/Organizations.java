@@ -2,9 +2,12 @@ package ru.plot.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.math.BigInteger;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 import java.sql.Timestamp;
 
@@ -44,7 +47,8 @@ public class Organizations {
   // организационно правовая форма организации
   @Column(name = "s_org_type") private String orgType;
   // дата рпостановки на учет в налоговом органе
-  @Column(name = "d_registration") private Date registration;
+  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+  @Column(name = "d_registration") private LocalDate registration;
   // ссылка на общероссийский классификатор стран мира
   @Column(name = "id_oksm") private BigInteger idOksm;
   // ОКАТО организации
