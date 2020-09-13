@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import ru.plot.jaxb.cb.ValCursType;
+import ru.plot.jaxb.cb.bic.BicCodeType;
+import ru.plot.service.BankService;
 import ru.plot.service.RateService;
 
 /**
@@ -22,11 +24,11 @@ public class CbBicDicLoader extends RouteBuilder {
     private String cbDictBicUrl;
 
     @Autowired
-    private RateService rateService;
+    private BankService bankService;
 
     @Override
     public void configure() throws Exception {
-        DataFormat jaxbDataFormat = new JaxbDataFormat("ru.plot.jaxb.cb");
+        DataFormat jaxbDataFormat = new JaxbDataFormat("ru.plot.jaxb.cb.bic");
 
         CamelContext context = new DefaultCamelContext();
         from("direct:startCbBicDictLoading")
@@ -35,11 +37,11 @@ public class CbBicDicLoader extends RouteBuilder {
                 .unmarshal(jaxbDataFormat)
                 .log("${body}")
                         .process(exchange -> {
-                            ValCursType body = exchange.getIn().getBody(ValCursType.class);
-                            rateService.saveCurse(body);
+                            BicCodeType body = exchange.getIn().getBody(BicCodeType.class);
+                            bankService.saveBankBic(body);
                             exchange.getOut().setBody("Ok");
                         })
-                .setBody().constant("Добрый день! Не забудьте сформировать ежедневный отчет об остатках на счетах до 11:00. Помните, дисциплина отчетности очень важна для компании.\n Желаю хорошего дня!")
+                .setBody().constant("Справочник кредитных организаций обновлен")
 
                 .to("direct:notifyBalanceDay");
     }

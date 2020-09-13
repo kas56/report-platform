@@ -1,20 +1,19 @@
 <!DOCTYPE HTML>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://thymeleaf.org ">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Spring Boot Thymeleaf + Spring Security</title>
+    <title>РосАтом :: ПлОт</title>
 
-    <div th:replace="fragments/header :: header-css"/>
+    <div th:replace="fragments/header :: header-css"></div>
 
 </head>
 <body>
 
-<div th:replace="fragments/header :: header"/>
+<div th:replace="fragments/header :: header"></div>
 
 <div class="container">
-    <span>Форма отчета</span>
-    <form action="#" th:action="@{/report/reportDetails}" th:object="${reportDetails}" method="post">
+    <h2>Форма отчета</h2>
+
+    <form id="balanceFormReport" action="#" th:action="@{/report/reportDetails}" th:object="${reportDetails}" method="post" style="display: none">
         <p><input type="submit" class="btn btn-success" value="Сохранить" /> <input type="reset" class="btn btn-danger" value="Вернуться" /></p>
 
         <div class="card-body">
@@ -118,19 +117,50 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row" id="formActionBlock">
+                        <button type="submit" class="btn btn-success">Сохранить</button>
+                        <button type="button" id="formActionCancel" class="btn btn-light">Отмена</button>
+                    </div>
                 </div>
             </div>
         </div>
     </form>
+    <br/>
+    <div class="row" id="actionBlock">
+        <button type="button" id="addDetail" class="btn btn-primary">Добавить</button>
+        <button type="button" class="btn btn-success">Отправить</button>
+        <button type="button" class="btn btn-light">Выгрузить в Excel</button>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="bs-example">
+            <table class="table" width="100%" cellspacing="0">
+                <thead class="thead-dark">
+                <tr>
+                    <th>№п/п</th>
+                    <th>Наименование организации </th>
+                    <th>Банк</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each ="detail : ${report.reportDetails}">
+                    <td th:utext="${detail.id}">...</td>
+                    <td th:utext="${detail.shortname}">...</td>
+                    <td th:utext="${detail.bic}">...</td>
+                </tr>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 <!-- /.container -->
+<div th:replace="fragments/footer :: footer"></div>
 
-<div th:replace="fragments/footer :: footer"/>
+<script type="text/javascript" th:src="@{/js/balance-form-page.js}"></script>
 
-<script type="text/javascript" th:src="@{/js/table1-page.js}"></script>
-
-<script type="text/javascript">  
-    $(document).ready(table1PageScript)();
+<script type="text/javascript">
+    $(document).ready(balanceFormPageScript)();
 </script>
 
 </body>

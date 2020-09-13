@@ -18,7 +18,7 @@ import java.util.Optional;
 public class ReportSevice {
 
     @Autowired
-    ReportRepository reportRepository;
+    ReportsRepository reportRepository;
     @Autowired
     VReportHeaderRepository vReportHeaderRepository;
     @Autowired

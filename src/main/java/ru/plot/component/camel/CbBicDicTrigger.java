@@ -5,13 +5,13 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.impl.DefaultCamelContext;
 import org.springframework.stereotype.Component;
 
-//@Component
+@Component
 public class CbBicDicTrigger extends RouteBuilder {
     @Override
     public void configure() throws Exception {
         CamelContext context = new DefaultCamelContext();
 
-        from("quartz://myGroup/myTimerName?cron=0+*+*+?+*+*+*&trigger.misfireInstruction=2")
+        from("quartz://myGroup/cbBicTimer?cron=0+0/5+*+?+*+*+*&trigger.misfireInstruction=2")
                 .setBody().constant("event")
                 .log("${body}")
                 .to("direct:startCbBicDictLoading")

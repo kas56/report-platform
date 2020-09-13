@@ -8,11 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 import ru.plot.dto.ReportDto;
+import ru.plot.entity.Reports;
+import ru.plot.entity.UserEntity;
+import ru.plot.repo.ReportsRepository;
 import ru.plot.service.PermissionService;
 import ru.plot.entity.Okv;
 import ru.plot.entity.Organizations;
@@ -21,10 +26,14 @@ import ru.plot.repo.OrganizationsRepository;
 
 import javax.annotation.security.RolesAllowed;
 import java.io.*;
+import java.math.BigInteger;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/report")
@@ -36,6 +45,9 @@ public class ReportController {
 
     @Autowired
     private OkvRepository okvRepository;
+
+    @Autowired
+    private ReportsRepository reportsRepository;
 
     private PermissionService permissionService;
 
@@ -66,19 +78,33 @@ public class ReportController {
 
     @GetMapping("/balance/form")
     public String balanceForm(@RequestParam(required = false, value = "reportId") String reportId, Model model) {
-        //Справочник организаций
+        if (reportId==null || reportId.isEmpty()) {
+            Reports report = new Reports();
+            report.setDateReport(LocalDate.now());
+            UserEntity principal = (UserEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            report.setIdUser(principal.getIdUser());
+            Reports save = reportsRepository.save(report);
+            return "redirect:/report/balance/form?reportId="+save.getId();
+        } else {
+
+            Optional<Reports> save = reportsRepository.findById(new BigInteger(reportId));
+            Reports reports = save.get();
+            model.addAttribute("report", reports);
+            //Справочник организаций
         List<Organizations> organizations = organizationsRepository.findAll();
         model.addAttribute("organizations", organizations);
 
         //Справочник валют
         Iterable<Okv> okvCodes = okvRepository.findAll();
         model.addAttribute("okvCodes", okvCodes);
+        model.addAttribute("reportDetails", new ArrayList<>());
         model.addAttribute("perms", permissionService.getUserPermissions());
 
         model.addAttribute("reportDetails", new ReportDto());
         model.addAttribute("perms", permissionService.getUserPermissions());
 
         return "/report/balance-form";
+        }
     }
 
     @RequestMapping(value="/reportDetails", method=RequestMethod.POST)

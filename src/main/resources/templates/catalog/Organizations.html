@@ -9,7 +9,7 @@
 <body>
 <div th:replace="fragments/header :: header"/>
     <div class="container">
-        <h2>Справочник кредитных организаций <span class="badge badge-secondary"></span></h2>
+        <h2>Справочник организаций</h2>
         <br>
         <form sec:authorize="hasRole('ADMIN')" action="#" th:action="@{/catalog/CurrencyRates}" method="post">
             <div class="row">
@@ -37,7 +37,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each ="bic : ${bankBics}">
+                <tr th:each ="bic : ${orgs}">
                     <td th:utext="${bic.id}">...</td>
                     <td th:utext="${bic.shortname}">...</td>
                     <td th:utext="${bic.bic}">...</td>
