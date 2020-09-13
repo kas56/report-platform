@@ -148,7 +148,7 @@ fieldset{
     /* margin-bottom: 2em; */
     text-transform: uppercase;
     padding: 5px 10px;
-    height: 30px;
+    height: 35px;
 }
 
 #login form input[type="submit"]:hover {

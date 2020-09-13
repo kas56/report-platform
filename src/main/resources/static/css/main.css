@@ -17,3 +17,11 @@ footer{
 td .nav-link {
     padding: 0;
 }
+
+.table.calendar-table td {
+    font-size: 13px;
+}
+.table.calendar-table td.date {
+    font-size: 15px;
+    font-weight: bold;
+}
